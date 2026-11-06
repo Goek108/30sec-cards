@@ -1,0 +1,3044 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>話せる知識 30秒カード</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>/* Layout: single reading column (max ~760px), sticky chapter rail on top, each question a rounded card with question / answer zones */
+:root{
+  --paper:#f6f6f4; --card:#ffffff; --ink:#151515; --muted:#5f5d58; --line:#dedcd6;
+  --gold:#a7843a; --gold-soft:#f4ecdb;
+  --q-bg:#f1f0ec; --ex-bg:#fbf8f1; --hint-bg:#f3f5f6;
+  --def:#3f5568; --def-bg:#e6ecf1; --cmp:#8a6a24; --cmp-bg:#f4ecdb; --app:#2f5d4a; --app-bg:#e2efe8; --quick:#4b4b4b; --quick-bg:#ebebeb;
+  --display:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  --body:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:16px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#121211; --card:#1c1c1a; --ink:#ecebe7; --muted:#a6a39b; --line:#33322e;
+  --gold:#d2b26a; --gold-soft:#2c2618;
+  --q-bg:#262522; --ex-bg:#24211a; --hint-bg:#1f2326;
+  --def:#a9c1d6; --def-bg:#23303b; --cmp:#e0c47f; --cmp-bg:#352c19; --app:#9fd0b7; --app-bg:#1d3329; --quick:#cfcfcf; --quick-bg:#2e2e2e;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#121211; --card:#1c1c1a; --ink:#ecebe7; --muted:#a6a39b; --line:#33322e;
+  --gold:#d2b26a; --gold-soft:#2c2618;
+  --q-bg:#262522; --ex-bg:#24211a; --hint-bg:#1f2326;
+  --def:#a9c1d6; --def-bg:#23303b; --cmp:#e0c47f; --cmp-bg:#352c19; --app:#9fd0b7; --app-bg:#1d3329; --quick:#cfcfcf; --quick-bg:#2e2e2e;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.75;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0}
+.wrap{max-width:780px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:8px 80px;display:flex;flex-direction:column;gap:28px}
+
+/* chapter rail */
+.chnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ink);color:#f3f1ea}
+.chnav-in{max-width:980px;margin:0 auto;display:flex;gap:6px;align-items:center;overflow-x:auto;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));scrollbar-width:none}
+.chnav a{flex:none;text-decoration:none;font-size:12.5px;padding:5px 11px;border-radius:999px;border:1px solid #3d3c38;color:#e8e5dc;white-space:nowrap}
+.chnav a b{font-family:var(--mono);color:#d2b26a;margin-right:6px}
+.chnav a:hover,.chnav a:focus-visible{border-color:#d2b26a;outline:none}
+.toggle{position:fixed;z-index:6;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));font:700 13px var(--body);padding:10px 18px;border-radius:999px;border:0;background:var(--ink);color:var(--paper);box-shadow:0 4px 14px rgba(0,0,0,.18);cursor:pointer}
+.toggle:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* hero */
+.hero{padding-top:36px;display:flex;flex-direction:column;gap:14px}
+.eyebrow{margin:0;font:700 11.5px var(--mono);letter-spacing:.12em;color:var(--gold)}
+.hero h1{font-size:clamp(34px,7vw,52px);font-weight:900;line-height:1.15;letter-spacing:.01em}
+.sub{margin:0;color:var(--muted);font-size:15.5px}
+.toc{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.toc a{display:flex;align-items:baseline;gap:10px;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.toc a:hover{border-color:var(--gold)}
+.tn{font:700 12px var(--mono);color:var(--gold);flex:none}
+.tt{flex:1;min-width:0;font-weight:500}
+.tc{font:500 12px var(--mono);color:var(--muted)}
+.legend{margin:4px 0 0;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:13px;color:var(--muted)}
+
+/* intro sections */
+.intro{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 22px 10px}
+.intro h2{font-size:21px;margin-bottom:10px}
+.intro h3{font-size:16px;margin:18px 0 6px}
+.intro p{margin:.4em 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 14px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--q-bg);font-weight:700;white-space:nowrap}
+.intro table,.tbl{display:block;overflow-x:auto}
+.intro table{display:table}
+.intro{overflow-x:auto}
+
+/* chapter */
+.chapter{display:flex;flex-direction:column;gap:18px;scroll-margin-top:60px}
+.ch-head{padding-top:30px;border-top:3px solid var(--ink);display:flex;flex-direction:column;gap:6px}
+.ch-no{font:700 13px var(--mono);color:var(--gold);letter-spacing:.08em}
+.ch-head h2{font-size:clamp(24px,4.6vw,32px);font-weight:900}
+.lead{margin:4px 0 0;color:var(--muted);max-width:62ch}
+.set{display:flex;align-items:baseline;gap:10px;margin-top:8px;font-size:13px;color:var(--muted)}
+.set span{font:700 12px var(--mono);letter-spacing:.08em;color:var(--card);background:var(--ink);padding:3px 10px;border-radius:999px}
+.set em{font-style:normal}
+.flow{background:var(--gold-soft);border-radius:12px;padding:12px 16px;font-size:14px}
+.flow p{margin:.3em 0}
+h3.sub{font-size:17px;margin-top:6px}
+
+/* card */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px;scroll-margin-top:64px;box-shadow:0 1px 0 rgba(0,0,0,.03)}
+.card:target{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.card-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.card-head h3{flex:1 1 100%;font-size:17.5px;font-weight:700;line-height:1.45}
+.num{font:700 13px var(--mono);color:var(--muted)}
+.badge{display:inline-block;font:700 11.5px var(--body);padding:2px 10px;border-radius:999px;letter-spacing:.04em}
+.badge.def{color:var(--def);background:var(--def-bg)}
+.badge.cmp{color:var(--cmp);background:var(--cmp-bg)}
+.badge.app{color:var(--app);background:var(--app-bg)}
+.badge.quick{color:var(--quick);background:var(--quick-bg)}
+.card-note{margin:0;font-size:12.5px;color:var(--muted)}
+.label{display:block;font:700 11px var(--mono);letter-spacing:.12em;color:var(--muted);margin-bottom:4px}
+.q{background:var(--q-bg);border-radius:12px;padding:12px 14px}
+.q p{margin:0;font-size:16px;font-weight:500;line-height:1.65}
+.card[data-type="app"] .q{background:var(--app-bg)}
+.para ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px;font-size:14px;color:var(--muted)}
+.para li::before{content:"↻ ";color:var(--gold)}
+.answer{display:flex;flex-direction:column;gap:10px}
+.box{border-radius:12px;padding:12px 14px;border:1px solid var(--line)}
+.box h4{font-size:13px;font-weight:700;margin-bottom:4px;letter-spacing:.03em}
+.box h4 small{font:500 11.5px var(--body);color:var(--muted);margin-left:4px}
+.box ul{margin:0;padding-left:1.2em}
+.box li{margin:2px 0}
+.box p{margin:0}
+.pts{background:var(--card)}
+.ex{background:var(--ex-bg);border-color:transparent}
+.ex h4{color:var(--gold)}
+.ex blockquote{margin:0;font-size:14.5px;line-height:1.85}
+.hint{background:var(--hint-bg);border-color:transparent;font-size:13.5px}
+.rel{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rel .label{margin:0 4px 0 0}
+.chip{font:500 12px var(--mono);text-decoration:none;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.chip:hover,.chip:focus-visible{border-color:var(--gold);color:var(--ink);outline:none}
+.peek{display:none;align-self:flex-start;font:700 13px var(--body);padding:7px 16px;border-radius:999px;border:1.5px dashed var(--gold);background:transparent;color:var(--ink);cursor:pointer}
+.peek:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+body.hide-answers .peek{display:inline-block}
+body.hide-answers .card:not(.open) .answer{display:none}
+
+.tablecard .tbl{overflow-x:auto}
+.tablecard .tbl table{min-width:100%}
+.tablecard p{margin:.3em 0}
+
+@media (max-width:520px){
+  .card{padding:14px}
+  .q p{font-size:15px}
+  .intro{padding:16px 14px 6px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
+</head>
+<body>
+<nav class="chnav" aria-label="章"><div class="chnav-in"><a href="#ch1"><b>1</b>ブランドと価値観</a><a href="#ch2"><b>2</b>サービススタンダード</a><a href="#ch3"><b>3</b>キャップの仕組み</a><a href="#ch4"><b>4</b>シルエットの選び方</a><a href="#ch5"><b>5</b>キャップ以外のヘッドウェア・キッズ</a><a href="#ch6"><b>6</b>アパレル・ソックス</a><a href="#ch7"><b>7</b>アクセサリー・ケア</a><a href="#ch8"><b>8</b>バックパック</a><a href="#ch9"><b>9</b>NEW ERA REWARD</a><a href="#ch10"><b>10</b>瞬発トレーニング</a><button type="button" id="toggle" class="toggle" aria-pressed="false">答えを隠す</button></div></nav>
+<main class="wrap">
+<header class="hero">
+<p class="eyebrow">NEW ERA RETAIL TRAINING ・ 1.BR.4 知識テスト対応</p>
+<h1>話せる知識<br>30秒カード</h1>
+<p class="sub">知っていることを、お客様との会話で「自分の言葉」で伝えるための練習カード</p>
+<ol class="toc"><li><a href="#ch1"><span class="tn">第1章</span><span class="tt">ブランドと価値観</span><span class="tc">10問</span></a></li><li><a href="#ch2"><span class="tn">第2章</span><span class="tt">サービススタンダード</span><span class="tc">10問</span></a></li><li><a href="#ch3"><span class="tn">第3章</span><span class="tt">キャップの仕組み</span><span class="tc">10問</span></a></li><li><a href="#ch4"><span class="tn">第4章</span><span class="tt">シルエットの選び方</span><span class="tc">15問</span></a></li><li><a href="#ch5"><span class="tn">第5章</span><span class="tt">キャップ以外のヘッドウェア・キッズ</span><span class="tc">10問</span></a></li><li><a href="#ch6"><span class="tn">第6章</span><span class="tt">アパレル・ソックス</span><span class="tc">10問</span></a></li><li><a href="#ch7"><span class="tn">第7章</span><span class="tt">アクセサリー・ケア</span><span class="tc">10問</span></a></li><li><a href="#ch8"><span class="tn">第8章</span><span class="tt">バックパック</span><span class="tc">10問</span></a></li><li><a href="#ch9"><span class="tn">第9章</span><span class="tt">NEW ERA REWARD</span><span class="tc">7問</span></a></li><li><a href="#ch10"><span class="tn">第10章</span><span class="tt">瞬発トレーニング</span><span class="tc">3問</span></a></li></ol>
+<p class="legend"><span class="badge def">定義</span>自分の言葉で説明 <span class="badge cmp">比較</span>違いを一言で <span class="badge app">応用</span>お客様の一言から提案 <span class="badge quick">瞬発</span>3秒で返す</p>
+</header>
+<section class="intro" id="about"><h2>この質問集について</h2><p>みなさんは、ニューエラの商品やブランドのことを、すでに紙の上ではしっかり答えられるだけの知識を持っています。
+ただ、店頭のお客様は「〇〇とは何ですか?」とは聞いてくれません。「これ、さっきのと何が違うの?」「髪を切ったらゆるくなっちゃって」——聞き方は毎回ちがいます。
+このカードは、身につけた知識を、どんな聞き方をされても30秒で取り出し、お客様にとってのうれしさまで伝えられるようにするための練習です。
+1日5〜7分、声に出すことを積み重ねて、お客様が「聞いてよかった」と思える会話を増やしていきましょう。</p></section><section class="intro" id="howto"><h2>使い方</h2><h3>所要時間</h3>
+<ul>
+<li><strong>1セット=5問・5〜7分</strong>(朝礼前、アイドルタイムなど)</li>
+<li>全24セット(第1〜9章:19セット、第10章:5セット)。1日1セット・週3回で、約8週間で全体を1周できます</li>
+<li>第9章セットB(2問)と第10章セットE(3問)は5問より短いセットです。前のセットと続けてもOK。第10章の表は、1回5〜10問を抜き出して出します(全部やらなくてOK)</li>
+</ul>
+<h3>問いの型</h3>
+<p>カードの見出しには、次の4つの型のラベルがついています。同じ知識を、角度を変えて取り出す練習です。</p>
+<table>
+<thead>
+<tr>
+<th>型</th>
+<th>どんな問い?</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>【定義】</td>
+<td>「〇〇って何?」を、自分の言葉で説明する</td>
+<td>「トゥルーフィッテドって何?」</td>
+</tr>
+<tr>
+<td>【比較】</td>
+<td>2つのちがいを一言で言う</td>
+<td>「59FIFTYと9FIFTY、違いを一言で言うと?」</td>
+</tr>
+<tr>
+<td>【応用】</td>
+<td>お客様の一言から、何を提案するか・どう答えるかを考える</td>
+<td>お客様「髪を切ったらゆるくなっちゃって…」</td>
+</tr>
+<tr>
+<td>【瞬発】</td>
+<td>覚えておきたいことを3秒で返す(第10章)</td>
+<td>「58.7cmは何インチ?」</td>
+</tr>
+</tbody>
+</table>
+<h3>ペア練習の手順(問いかける人と練習する人の2人で)</h3>
+<ol>
+<li><strong>問いかける人</strong>がカードを1枚選び、「問い」を読み上げる。「言い換え」から1つ選んで聞いてもOK(聞き方を変えるほど練習になります)。【応用】のカードでは、問いかける人がお客様になったつもりで、お客様のセリフを読み上げる。( )内の状況は先に一言で伝える</li>
+<li><strong>練習する人</strong>が30秒で答える。売場の商品を手に取って説明してOK</li>
+<li><strong>問いかける人</strong>が「よかった点を1つ」と「次に足すとよくなることを1つ」を伝える(30秒)。下の「4つの視点」を使ってください</li>
+<li>時間があれば、カードの「深掘り」の質問を1つだけ追加する</li>
+<li>5問終わったら、練習する人が「今日いちばん言いやすくなった1問」を一言で振り返る</li>
+</ol>
+<p>※ 問いかける人は「答えのポイント」と「良い答えの例」を見ながら聞いてかまいません。練習する人には答えを先に見せないでください。
+※ 詰まったときは、カードの「詰まったら」のヒントを1つ出してください。答えを先に言うより、ヒントで自分から取り出せた方が身につきます。</p>
+<h3>自主練の手順(1人で)</h3>
+<ol>
+<li>「問い」だけを読む(答えの部分は手や紙で隠す)</li>
+<li>声に出して30秒で答える。スマホで録音すると、聞き返して気づけることが増えます</li>
+<li>「答えのポイント」と照らし合わせる</li>
+<li>「良い答えの例」を一度、声に出して読む</li>
+<li>もう一度、「言い換え」の聞き方で答えてみる</li>
+</ol>
+<h3>フィードバックの4つの視点</h3>
+<p>○×はつけず、記録も残しません。練習する人が「次はこう言ってみよう」と思える一言を伝えることが目的です。</p>
+<table>
+<thead>
+<tr>
+<th>視点</th>
+<th>見るところ</th>
+<th>声かけの例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 正確さ</td>
+<td>資料どおりの内容を言えているか</td>
+<td>「資料どおりに言えていたね」/「ここは〇〇だよ。もう一回言ってみよう」</td>
+</tr>
+<tr>
+<td>② 自分の言葉</td>
+<td>資料の文章の読み上げではなく、話し言葉になっているか</td>
+<td>「自分の言葉で言えていて、すごく伝わりやすかった」</td>
+</tr>
+<tr>
+<td>③ お客様のメリット</td>
+<td>機能を言ったあと「なので、〇〇できます」まで言えているか</td>
+<td>「"なので、型崩れしにくいです"まで言えると、お客様に届くね」</td>
+</tr>
+<tr>
+<td>④ ニーズに合わせた選択</td>
+<td>お客様の一言から、合う商品を選べているか</td>
+<td>「お客様の"ラフに被りたい"から選べていたね」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>伝え方のコツ</strong>
+- よかった点を先に、具体的に(「〇〇って言い方がよかった」)
+- 足すとよいことは1つだけ
+- 「なんで言えなかったの?」ではなく「次は〇〇も入れてみよう」と、次の行動で伝える</p>
+<h3>カードの見方</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>使う人</th>
+<th>中身</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>問い</td>
+<td>問いかける人が読み上げる</td>
+<td>カード番号と型ラベルつき</td>
+</tr>
+<tr>
+<td>言い換え</td>
+<td>問いかける人</td>
+<td>同じ内容を別の聞き方で。慣れてきたらこちらで聞く</td>
+</tr>
+<tr>
+<td>答えのポイント</td>
+<td>問いかける人/自主練の確認用</td>
+<td>社内資料の内容。( )内は出典の設問番号</td>
+</tr>
+<tr>
+<td>良い答えの例</td>
+<td>問いかける人/自主練の音読用</td>
+<td>30秒・お客様向けの話し言葉の一例。言い回しは自由でOK(第2章の定義・比較カードは、スタッフ同士で説明する言葉の例)</td>
+</tr>
+<tr>
+<td>問いかける人へ</td>
+<td>問いかける人</td>
+<td>「詰まったら」のヒントと「深掘り」の質問</td>
+</tr>
+<tr>
+<td>関連</td>
+<td>両方</td>
+<td>一緒に練習すると効果的なカード番号</td>
+</tr>
+</tbody>
+</table></section><section class="intro" id="map"><h2>設問対応表</h2><p>1.BR.4の設問1〜17が、このカードのどの章で練習できるかの一覧です。</p>
+<table>
+<thead>
+<tr>
+<th>設問</th>
+<th>内容</th>
+<th>主に練習する章</th>
+<th>主なカード</th>
+<th>あわせて出てくる章</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>NEW ERAとはどんなブランドか</td>
+<td>第1章 ブランドと価値観</td>
+<td>1-01、1-05、1-07</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4つのバリュー</td>
+<td>第1章 ブランドと価値観</td>
+<td>1-02、1-10</td>
+<td>—</td>
+</tr>
+<tr>
+<td>3</td>
+<td>サービススタンダードの5つの軸</td>
+<td>第2章 サービススタンダード</td>
+<td>2-01〜2-10</td>
+<td>—</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Authentic Collection(オンフィールドキャップ)</td>
+<td>第1章 ブランドと価値観</td>
+<td>1-03、1-06、1-08</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5</td>
+<td>MLB以外のコレクション</td>
+<td>第1章 ブランドと価値観</td>
+<td>1-04、1-09、表10-F</td>
+<td>第10章 瞬発トレーニング</td>
+</tr>
+<tr>
+<td>6</td>
+<td>インチ表記のサイズとcm</td>
+<td>第10章 瞬発トレーニング</td>
+<td>表10-B、10-01</td>
+<td>—</td>
+</tr>
+<tr>
+<td>7</td>
+<td>キャップの特徴(用語11語)</td>
+<td>第3章 キャップの仕組み</td>
+<td>3-01〜3-10</td>
+<td>第4章 シルエットの選び方/第7章 アクセサリー・ケア/第10章 瞬発トレーニング</td>
+</tr>
+<tr>
+<td>8</td>
+<td>シルエット別の特徴</td>
+<td>第4章 シルエットの選び方</td>
+<td>4-01〜4-15</td>
+<td>第3章 キャップの仕組み</td>
+</tr>
+<tr>
+<td>9</td>
+<td>キャップ以外のヘッドウェア</td>
+<td>第5章 キャップ以外のヘッドウェア・キッズ</td>
+<td>5-01、5-03〜5-07、5-09、5-10</td>
+<td>—</td>
+</tr>
+<tr>
+<td>10</td>
+<td>ソックスの種類とサイズ</td>
+<td>第6章 アパレル・ソックス</td>
+<td>6-02、表10-D、10-02</td>
+<td>第10章 瞬発トレーニング</td>
+</tr>
+<tr>
+<td>11</td>
+<td>NEW ERA REWARD</td>
+<td>第9章 NEW ERA REWARD</td>
+<td>9-01〜9-07</td>
+<td>—</td>
+</tr>
+<tr>
+<td>12</td>
+<td>アパレルの各ライン</td>
+<td>第6章 アパレル・ソックス</td>
+<td>6-01、6-03〜6-10</td>
+<td>—</td>
+</tr>
+<tr>
+<td>13</td>
+<td>アクセサリー</td>
+<td>第7章 アクセサリー・ケア</td>
+<td>7-01〜7-10</td>
+<td>第4章 シルエットの選び方/第8章 バックパック</td>
+</tr>
+<tr>
+<td>14</td>
+<td>キッズの3サイズと対象年齢</td>
+<td>第5章 キャップ以外のヘッドウェア・キッズ</td>
+<td>5-02、5-08、表10-E、10-03</td>
+<td>第10章 瞬発トレーニング</td>
+</tr>
+<tr>
+<td>15</td>
+<td>バックヤードのカテゴリ</td>
+<td>第10章 瞬発トレーニング</td>
+<td>表10-C</td>
+<td>—</td>
+</tr>
+<tr>
+<td>16</td>
+<td>MLBチーム名</td>
+<td>第10章 瞬発トレーニング</td>
+<td>表10-A</td>
+<td>—</td>
+</tr>
+<tr>
+<td>17</td>
+<td>バックパック</td>
+<td>第8章 バックパック</td>
+<td>8-01〜8-10</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></section>
+<section class="chapter" id="ch1">
+<header class="ch-head"><span class="ch-no">第1章</span><h2>ブランドと価値観</h2><p class="lead">「ニューエラってどんなブランド?」を、初めてのお客様にも30秒で、ワクワクが伝わる言葉で話せるようにします。歴史・選手用キャップ・コレクションの広がりを、お客様の一言から取り出す練習です。</p></header>
+<div class="set"><span>セットA</span><em>(1-01〜1-05)</em></div>
+<article class="card" id="c-1-01" data-type="def">
+<header class="card-head">
+<span class="num">1-01</span><span class="badge def">定義</span>
+<h3>ニューエラはどんなブランド?</h3></header>
+<div class="q"><span class="label">問い</span><p>「ニューエラって、どんなブランド?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「ニューエラってどこの国のブランド?」</li><li>「ニューエラって何がすごいの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q1)</small></h4><ul>
+<li>1920年に創設された、100年の歴史を持つ米国のヘッドウェア&amp;アパレルブランド</li>
+<li>メジャーリーグベースボール唯一の公式選手用キャップサプライヤー</li>
+<li>ルーツはスポーツ。コラボレーションや新しいスタイル・カテゴリーの商品を生み続け、ファッション/カルチャーの領域でも支持されている</li>
+<li>代表モデルはベースボールキャップのスタンダード「59FIFTY」。アパレル、バッグなど多彩なラインナップ</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ニューエラは1920年にアメリカで生まれた、100年の歴史があるヘッドウェアとアパレルのブランドです。メジャーリーグ唯一の公式選手用キャップサプライヤーとして、選手のキャップを作り続けているブランドです。スポーツだけでなく、ファッションとして楽しまれている方も多いですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「何年にできたブランドだったっけ?」「メジャーリーグとの関係は?」</li>
+<li>深掘り:「その中で、代表モデルを1つ挙げるなら?」(→59FIFTY)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-05">1-05</a><a class="chip" href="#c-1-07">1-07</a></footer>
+</article>
+<article class="card" id="c-1-02" data-type="def">
+<header class="card-head">
+<span class="num">1-02</span><span class="badge def">定義</span>
+<h3>4つのバリュー</h3></header>
+<div class="q"><span class="label">問い</span><p>「ニューエラの4つのバリューを、意味と一緒に言ってみて」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「ニューエラが大事にしている4つの言葉って何?」</li><li>「Individualityってどういう意味だった?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q2)</small></h4><ul>
+<li>Authentic=本物</li>
+<li>Individuality=個性</li>
+<li>Collaboration=協働/共同</li>
+<li>Pride=自尊/誇り</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ニューエラは4つのことを大切にしています。本物であることのAuthentic、個性のIndividuality、協働のCollaboration、そして誇りのPrideです。なので、本物のクオリティを大事にしながら、お客様一人ひとりの個性に合う一つを一緒に見つけていきたいと思っています。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「頭文字だけ言うと、A・I・C・P。思い出せる?」</li>
+<li>深掘り:「4つのうち、今日の接客でいちばん意識したいのはどれ?それはどんな行動になる?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-10">1-10</a></footer>
+</article>
+<article class="card" id="c-1-03" data-type="def">
+<header class="card-head">
+<span class="num">1-03</span><span class="badge def">定義</span>
+<h3>Authentic Collection(オンフィールドキャップ)</h3></header>
+<div class="q"><span class="label">問い</span><p>「Authentic Collectionって、どんなコレクション?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「オンフィールドキャップって何?」</li><li>「"オーセンティック"って書いてあるキャップは何が特別なの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q4)</small></h4><ul>
+<li>米国、カナダの30チームが参加するMLB(メジャーリーグ・ベースボール)のオーセンティックコレクション</li>
+<li>オンフィールドキャップは、MLB全球団の選手がフィールドで着用するものと同様の素材を使用</li>
+<li>デザインも全く同じ仕様</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「こちらはAuthentic Collectionといって、メジャーリーグの選手がフィールドで被っているものと同様の素材で、デザインは全く同じ仕様です。なので、試合で見る選手と同じデザインのキャップで応援していただけます。アメリカとカナダの30チームのコレクションです。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"オンフィールド"って、どこで被るものだと思う?」</li>
+<li>深掘り:「MLBは何チームあって、どこの国のチームだった?」(→米国・カナダの30チーム)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-06">1-06</a><a class="chip" href="#c-1-08">1-08</a></footer>
+</article>
+<article class="card" id="c-1-04" data-type="def">
+<header class="card-head">
+<span class="num">1-04</span><span class="badge def">定義</span>
+<h3>MLB以外のコレクション</h3></header>
+<div class="q"><span class="label">問い</span><p>「MLB以外に、どんなコレクションがある?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「メジャーリーグ以外のチームのキャップってある?」</li><li>「コレクションの名前、6つ言える?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q5)</small></h4><ul>
+<li>Cooperstown</li>
+<li>Negro Leagues</li>
+<li>NBA</li>
+<li>NFL</li>
+<li>NPB</li>
+<li>NPB Classic</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「メジャーリーグ以外にも、NBAやNFL、日本のプロ野球のNPB、NPB Classic、それからCooperstownやNegro Leaguesのコレクションもあります。なので、野球以外のスポーツがお好きな方や、日本のチームを応援されている方にも選んでいただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「野球のほかに、アメリカのスポーツは?」「日本のプロ野球は何て呼ぶ?」</li>
+<li>深掘り:「売場で、そのコレクションがどこに並んでいるか案内できる?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-09">1-09</a></footer>
+</article>
+<article class="card" id="c-1-05" data-type="cmp">
+<header class="card-head">
+<span class="num">1-05</span><span class="badge cmp">比較</span>
+<h3>スポーツのブランド?ファッションのブランド?</h3></header>
+<div class="q"><span class="label">問い</span><p>「ニューエラって、スポーツのブランド?それともファッションのブランド?一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「野球をしない人も被っていいの?」</li><li>「スポーツとファッション、ニューエラはどっち寄り?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q1)</small></h4><ul>
+<li>ルーツはスポーツ(メジャーリーグベースボール唯一の公式選手用キャップサプライヤー)</li>
+<li>数多くのブランド、アーティストとのコラボレーションや、新しいスタイル・カテゴリーの商品を生み続け、ファッション/カルチャーの領域でも高い支持を受けている</li>
+<li>「どちらか」ではなく「スポーツがルーツで、ファッション/カルチャーでも支持されている」</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ルーツはスポーツで、メジャーリーグの公式選手用キャップを作っているブランドです。そのうえで、いろいろなブランドやアーティストとのコラボも多いので、ファッションとして楽しまれている方もたくさんいらっしゃいます。野球をされない方でも、普段のコーディネートに合わせていただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ルーツはどこにある?」「コラボの話を覚えてる?」</li>
+<li>深掘り:「野球に興味がないお客様に、どの一言から話し始める?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-01">1-01</a><a class="chip" href="#c-1-07">1-07</a></footer>
+</article>
+<div class="set"><span>セットB</span><em>(1-06〜1-10)</em></div>
+<article class="card" id="c-1-06" data-type="cmp">
+<header class="card-head">
+<span class="num">1-06</span><span class="badge cmp">比較</span>
+<h3>Authentic Collectionと選手のキャップの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「Authentic Collectionと、選手が試合で被っているキャップって、何が違うの?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「これってレプリカ?」</li><li>「選手のと同じなの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q4)</small></h4><ul>
+<li>素材は、選手がフィールドで着用するものと同様のもの</li>
+<li>デザインは全く同じ仕様</li>
+<li>「同じものです」と言い切らず、「同様の素材」「デザインは全く同じ仕様」とソースの言葉で伝える</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「選手がフィールドで被っているものと同様の素材を使っていて、デザインは全く同じ仕様なんです。なので、テレビや球場で見る選手と同じデザインのキャップを被っていただけます。応援するときに、選手と同じ仕様のキャップを身につけられるのが、このコレクションの魅力です。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「素材とデザイン、それぞれどうだった?」</li>
+<li>深掘り:「デザインが同じ仕様だと、お客様にとって何がうれしい?」(→メリットまで言えているかを見る)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-03">1-03</a><a class="chip" href="#c-1-08">1-08</a></footer>
+</article>
+<article class="card" id="c-1-07" data-type="app">
+<header class="card-head">
+<span class="num">1-07</span><span class="badge app">応用</span>
+<h3>初めて来店されたお客様</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「ニューエラって名前は聞いたことあるんですけど、どんなブランドなんですか?」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「よく見かけるけど、どこのブランドなんですか?」</li><li>お客様「このマークのブランド、有名なんですか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q1)</small></h4><ul>
+<li>1920年創設、100年の歴史を持つ米国のブランド</li>
+<li>メジャーリーグベースボール唯一の公式選手用キャップサプライヤー</li>
+<li>ファッション/カルチャーの領域でも支持されている</li>
+<li>代表モデル「59FIFTY」を実物で見せられると伝わりやすい</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「アメリカで1920年に生まれた、100年続くヘッドウェアとアパレルのブランドなんです。メジャーリーグ唯一の公式選手用キャップサプライヤーとして、選手のキャップを作っているブランドです。こちらが代表モデルの59FIFTYです。よかったら一度被ってみてください、形のきれいさがわかると思います。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「まず何年・どこの国、から言ってみよう」</li>
+<li>深掘り:「そのあと、お客様に何を質問して会話を広げる?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-01">1-01</a><a class="chip" href="#c-1-05">1-05</a></footer>
+</article>
+<article class="card" id="c-1-08" data-type="app">
+<header class="card-head">
+<span class="num">1-08</span><span class="badge app">応用</span>
+<h3>選手と同じキャップを探しているお客様</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「メジャーリーグの選手が被ってるのと同じキャップってありますか?」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「試合で選手が被ってるやつが欲しいんです」</li><li>お客様「本物のチームのキャップってどれですか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q4・Q1)</small></h4><ul>
+<li>Authentic Collection(オンフィールドキャップ)を案内する</li>
+<li>選手がフィールドで着用するものと同様の素材、デザインも全く同じ仕様</li>
+<li>米国、カナダの30チームが参加するMLBのコレクション → 「どちらのチームがお好きですか?」と聞く</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、こちらのAuthentic Collectionがおすすめです。選手がフィールドで被っているものと同様の素材で、デザインは全く同じ仕様なので、選手と同じ仕様のキャップで応援していただけます。30チームのコレクションがありますが、応援されているチームはありますか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"オンフィールド"のコレクションの名前は?」</li>
+<li>深掘り:「お客様の応援チームがわかったら、次に何を確認する?」(→サイズ。3-01・10-01へ)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-03">1-03</a><a class="chip" href="#c-1-06">1-06</a><a class="chip" href="#c-3-01">3-01</a></footer>
+</article>
+<article class="card" id="c-1-09" data-type="app">
+<header class="card-head">
+<span class="num">1-09</span><span class="badge app">応用</span>
+<h3>野球以外のスポーツが好きなお客様</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「野球はあまり見ないんですけど、バスケとかアメフトのキャップもありますか?」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「メジャーリーグ以外のチームのものってあります?」</li><li>お客様「日本のプロ野球のキャップってありますか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q5)</small></h4><ul>
+<li>MLB以外のコレクション:Cooperstown / Negro Leagues / NBA / NFL / NPB / NPB Classic</li>
+<li>バスケットボールならNBA、アメフトならNFL、日本のプロ野球ならNPB・NPB Classic</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「はい、メジャーリーグ以外にも、バスケットボールのNBAやアメフトのNFLのコレクションもありますよ。日本のプロ野球のNPBのコレクションもあります。なので、野球をあまり見ない方でも、お好きなスポーツやチームに合わせて選んでいただけます。どのチームがお好きですか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「MLB以外のコレクション、頭文字がNで始まるものがいくつかあったよね」</li>
+<li>深掘り:「今日の店舗だと、そのコレクションはどこにある?実際に案内してみて」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-04">1-04</a></footer>
+</article>
+<article class="card" id="c-1-10" data-type="app">
+<header class="card-head">
+<span class="num">1-10</span><span class="badge app">応用</span>
+<h3>ブランドの考え方を聞かれたら</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「ニューエラって、どんなことを大事にしているブランドなんですか?」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「ブランドのこだわりってあるんですか?」</li><li>お客様「ほかのキャップブランドと何が違うんですか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q2・Q1)</small></h4><ul>
+<li>4つのバリュー:Authentic(本物)/Individuality(個性)/Collaboration(協働/共同)/Pride(自尊/誇り)</li>
+<li>全部を並べるより、1つか2つを選んで、自分の言葉と具体例で話す</li>
+<li>例:Authentic → メジャーリーグ唯一の公式選手用キャップサプライヤー/Collaboration → ブランド・アーティストとのコラボ</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ニューエラは"本物であること"と"個性"をとても大事にしています。メジャーリーグの公式選手用キャップを作っている本物のブランドでありながら、いろいろなアーティストとのコラボも多いんです。なので、お客様の個性に合わせて選べるデザインがたくさんありますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「4つのバリュー、どれか1つでいいから言ってみよう」</li>
+<li>※他社と比べる話はせず、ニューエラの特長を話す</li>
+<li>深掘り:「Prideを、お客様に伝わる言葉にするとしたら?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-1-02">1-02</a><a class="chip" href="#c-1-05">1-05</a></footer>
+</article>
+</section><section class="chapter" id="ch2">
+<header class="ch-head"><span class="ch-no">第2章</span><h2>サービススタンダード</h2><p class="lead">サービススタンダードの5つの軸を、名前だけでなく「店頭でこう動く・こう話す」という行動に言い換えられるようにします。お客様の一言から、どの軸を使う場面かを選べるようになることがゴールです。</p></header>
+<div class="flow"><p>※この章の【定義】【比較】カード(2-01〜2-06)の「良い答えの例」は、お客様向けではなく、スタッフ同士で説明するときの言葉の例です。</p></div>
+<div class="set"><span>セットA</span><em>(2-01〜2-05)</em></div>
+<article class="card" id="c-2-01" data-type="def">
+<header class="card-head">
+<span class="num">2-01</span><span class="badge def">定義</span>
+<h3>サービススタンダードの5つの軸</h3></header>
+<p class="card-note">(スタッフ同士で説明する練習カード。良い答えの例はお客様向けではありません)</p>
+<div class="q"><span class="label">問い</span><p>「サービススタンダードの5つの軸を、全部言ってみて」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「ニューエラの接客で大事にしている5つって何?」</li><li>「5つの軸のうち、数字がつくのはどれとどれ?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>記憶に残る体験の4つのポイント</li>
+<li>卓越したオペレーション</li>
+<li>サービスの5ステップ</li>
+<li>複数接客</li>
+<li>オーセンティックな立ち振る舞い</li>
+<li>目的:どの店舗・スタッフ・時間帯でも、定められたレベル以上のサービスを届ける。「サービス」の素晴らしさでお客さまから想起される存在になる</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「5つの軸は、記憶に残る体験の4つのポイント、卓越したオペレーション、サービスの5ステップ、複数接客、オーセンティックな立ち振る舞いです。この5つをみんなで守ることで、どの店舗でも、どのスタッフでも、お客様に同じように"ニューエラに来てよかった"と感じていただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「数字がつくものが2つあったよね。"4つ"と"5"は何だった?」</li>
+<li>深掘り:「サービススタンダードの目的を一言で言うと?」(→どの店舗・スタッフ・時間帯でも定められたレベル以上のサービス)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-02">2-02</a><a class="chip" href="#c-2-03">2-03</a></footer>
+</article>
+<article class="card" id="c-2-02" data-type="def">
+<header class="card-head">
+<span class="num">2-02</span><span class="badge def">定義</span>
+<h3>記憶に残る体験の4つのポイント</h3></header>
+<p class="card-note">(スタッフ同士で説明する練習カード。良い答えの例はお客様向けではありません)</p>
+<div class="q"><span class="label">問い</span><p>「記憶に残る体験の4つのポイントを、それぞれ一言の説明つきで言ってみて」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「"ユニーク&amp;パーソナル"って、店頭では何をすること?」</li><li>「"リピータブル"ってどういう意味だった?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>ユニーク&amp;パーソナル:お客さまを覚え、大切にされたと感じる瞬間をつくる(観察→判断→引き出し→提案。目線・体の向き・会話からヒントを得る)</li>
+<li>サプライズ:期待値を少し上回る接点を積み重ねる</li>
+<li>プロフェッショナル:高いスタンダード・安定したパフォーマンス・高い生産性</li>
+<li>リピータブル:何度でも再現できるよう、事前の想定と反復で、個人ではなくチームで磨き込む</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ユニーク&amp;パーソナルは、お客様を覚えて"大切にされている"と感じていただくこと。サプライズは、期待を少しだけ上回る瞬間を重ねること。プロフェッショナルは、いつも安定した高いレベルで接客すること。リピータブルは、それを誰でも何度でもできるようにチームで磨くことです。なので、どのスタッフが接客してもお客様の記憶に残る体験になります。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「頭文字は"ユ・サ・プ・リ"。1つずつ思い出してみよう」</li>
+<li>深掘り:「ユニーク&amp;パーソナルの"観察→判断→引き出し→提案"、お客様のどこを観察する?」(→目線・体の向き・会話)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-07">2-07</a><a class="chip" href="#c-2-08">2-08</a></footer>
+</article>
+<article class="card" id="c-2-03" data-type="def">
+<header class="card-head">
+<span class="num">2-03</span><span class="badge def">定義</span>
+<h3>サービスの5ステップ</h3></header>
+<p class="card-note">(スタッフ同士で説明する練習カード。良い答えの例はお客様向けではありません)</p>
+<div class="q"><span class="label">問い</span><p>「サービスの5ステップを、順番どおりに言ってみて」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「5ステップの最初と最後は何?」</li><li>「入店から何秒以内に何をする?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>①あいさつ&amp;アプローチ:入店5秒以内に笑顔・目線・あたたかい挨拶、30秒以内にその方に合ったユニークなお声がけ</li>
+<li>②ニーズの聞き出し:オープンクエスチョン、お手伝いしてよいかの許可、お連れ様も大切に(見る・聞く・絞る)</li>
+<li>③解決策の提示:製品ではなく解決策を売る。添えない場合は対案</li>
+<li>④課題や懸念の解消:探りを入れる・耳を傾ける・適切に対応。機能ではなく背景にあるメリットを語る</li>
+<li>⑤気持ちの良い別れ:再訪を促す言葉、会話のトピックを拾ったパーソナルな一言</li>
+<li>店舗の美しさもサービスの一部(売場は無言のスタッフ)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「1つ目があいさつ&amp;アプローチで、入店5秒以内に笑顔で挨拶、30秒以内にその方に合ったお声がけをします。2つ目がニーズの聞き出し、3つ目が解決策の提示、4つ目が課題や懸念の解消、最後が気持ちの良い別れです。この流れで接客すると、お客様は自分に合った一つを安心して選べて、また来たいと思っていただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「お客様が入ってきてから、お見送りするまでを順番に思い浮かべてみて」</li>
+<li>深掘り:「④で、"機能ではなく何を語る"んだった?」(→背景にあるメリット)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-07">2-07</a><a class="chip" href="#c-2-08">2-08</a><a class="chip" href="#c-2-10">2-10</a></footer>
+</article>
+<article class="card" id="c-2-04" data-type="def">
+<header class="card-head">
+<span class="num">2-04</span><span class="badge def">定義</span>
+<h3>オーセンティックな立ち振る舞い</h3></header>
+<p class="card-note">(スタッフ同士で説明する練習カード。良い答えの例はお客様向けではありません)</p>
+<div class="q"><span class="label">問い</span><p>「"オーセンティックな立ち振る舞い"って、どんな振る舞いのこと?言葉遣いの例も1つ入れて」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「"了解しました"は、店頭ではどう言い換える?」</li><li>「クッション言葉を3つ言ってみて」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>ラグジュアリーブランドの洗練さを体感していただく振る舞い</li>
+<li>上品さ/清潔感/気高さ/穏やか/冷静+親しみやすさ。所作・言葉遣い・姿勢・身だしなみ</li>
+<li>言葉遣いの例:了解しました→承知いたしました/よろしかったでしょうか→よろしいでしょうか/「NEWERA」→「NEW ERA」または「ニューエラ」</li>
+<li>クッション言葉:恐れ入りますが/申し訳ございませんが/よろしければ/少々お待ちくださいませ。事実と代案をセットで伝える</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「上品さや清潔感、穏やかさがありながら、親しみやすさもある振る舞いのことです。たとえば"了解しました"ではなく"承知いたしました"、お願いするときは"恐れ入りますが"とクッション言葉を添えます。なので、お客様にラグジュアリーブランドらしい心地よさを感じていただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「言葉遣い・所作・姿勢・身だしなみ。どれか1つから話してみよう」</li>
+<li>深掘り:「"よろしかったでしょうか"は、どう言い換える?」(→よろしいでしょうか)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-09">2-09</a><a class="chip" href="#c-2-10">2-10</a></footer>
+</article>
+<article class="card" id="c-2-05" data-type="cmp">
+<header class="card-head">
+<span class="num">2-05</span><span class="badge cmp">比較</span>
+<h3>卓越したオペレーションとサービスの5ステップ</h3></header>
+<p class="card-note">(スタッフ同士で説明する練習カード。良い答えの例はお客様向けではありません)</p>
+<div class="q"><span class="label">問い</span><p>「"卓越したオペレーション"と"サービスの5ステップ"、違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「オペレーションって接客とは関係ないの?」</li><li>「ランナーの100点って、どの軸の話?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>サービスの5ステップ:お客様をお迎えしてからお見送りするまでの接客の流れ</li>
+<li>卓越したオペレーション:店舗スタッフは店舗運営のプロ。売場・商品・接客・集客・販促はすべてオペレーションの上に成り立つ</li>
+<li>例:ランナーの100点(ストック位置・量の把握、インカムで在庫共有、出し漏れゼロ、お客さま・商品の記憶、相性を踏まえた提案商品のデリバリー)</li>
+<li>オペレーションのポイント:標準化・継続的向上・確認サイクルの高速化・属人化防止・型を守る</li>
+<li>補足(5ステップの項目):店舗の美しさもサービスの一部(売場は無言のスタッフ)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「5ステップはお客様と向き合う接客の流れで、オペレーションはその接客を支える土台です。たとえばランナーがストックの位置や量を把握して、インカムで在庫を共有できていれば、お客様をお待たせせずにすぐ商品をお持ちできます。なので、接客の時間をお客様の好みを聞くことに使えます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「売場・商品・接客・集客・販促は、何の上に成り立つんだった?」</li>
+<li>深掘り:「"売場は無言のスタッフ"って、どういう意味だと思う?」(→5ステップの項目。店舗の美しさもサービスの一部)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-01">2-01</a><a class="chip" href="#c-2-03">2-03</a></footer>
+</article>
+<div class="set"><span>セットB</span><em>(2-06〜2-10)</em></div>
+<article class="card" id="c-2-06" data-type="cmp">
+<header class="card-head">
+<span class="num">2-06</span><span class="badge cmp">比較</span>
+<h3>1対1の接客と複数接客</h3></header>
+<p class="card-note">(スタッフ同士で説明する練習カード。良い答えの例はお客様向けではありません)</p>
+<div class="q"><span class="label">問い</span><p>「ひとりのお客様だけを接客するのと"複数接客"、ニューエラではどちらが基本の形?理由も一言で」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「複数接客って、混んでいるときだけのこと?」</li><li>「接客中に見るべき"お客様のステージ"って何?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>ニューエラの接客は常に複数接客。スタッフ1人にお客様複数が基本形で、最初から1対2を想定する</li>
+<li>お客様のステージ(見る・選ぶ・迷う・決める)を読み、時間配分をコントロールする</li>
+<li>お待たせする場合は時間の目処を伝え、約束の時間までに必ずコンタクトする</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ニューエラでは、最初から1人で2組以上のお客様をご案内することを想定しています。お客様が"見る・選ぶ・迷う・決める"のどの段階にいるかを読んで、時間を配分します。なので、混んでいる日でも、どのお客様にも置いていかれたと感じさせずにご案内できます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「最初から何対何を想定するんだった?」(→1対2)</li>
+<li>深掘り:「"選ぶ"段階と"迷う"段階のお客様、どちらに先に時間を使う?理由は?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-09">2-09</a></footer>
+</article>
+<article class="card" id="c-2-07" data-type="app">
+<header class="card-head">
+<span class="num">2-07</span><span class="badge app">応用</span>
+<h3>入店されたお客様へのお声がけ</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様(入店して、59FIFTYの棚を見ながら)「いろいろあるなぁ…」 何と声をかける?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様(友人と2人で入店して)「ねえ、これ似合いそうじゃない?」</li><li>お客様(スマホの画面とキャップを見比べながら)「これかなぁ…」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>5ステップ①あいさつ&amp;アプローチ:入店5秒以内に笑顔・目線・あたたかい挨拶</li>
+<li>30秒以内に、その方に合ったユニークなお声がけ(決まり文句ではなく、その方を観察したお声がけ)</li>
+<li>記憶に残る体験「ユニーク&amp;パーソナル」:目線・体の向き・会話からヒントを得る</li>
+<li>お連れ様がいる場合は、お連れ様も大切にする(5ステップ②)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「(入店時に笑顔で)いらっしゃいませ。(30秒以内に)59FIFTYをご覧になっているんですね。こちらはニューエラの代表モデルで、型崩れしにくいのが特徴なんです。よろしければ、気になるチームやカラーはありますか?被り比べていただくと、似合う形がすぐわかりますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「何秒以内に挨拶、何秒以内にお声がけだった?」(→5秒、30秒)</li>
+<li>深掘り:「"スマホとキャップを見比べている"お客様だったら、何に気づいて声をかける?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-02">2-02</a><a class="chip" href="#c-2-03">2-03</a></footer>
+</article>
+<article class="card" id="c-2-08" data-type="app">
+<header class="card-head">
+<span class="num">2-08</span><span class="badge app">応用</span>
+<h3>見ているだけと言われたら</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「あ、大丈夫です。ちょっと見てるだけなので。」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「特に決めてないんですよね」</li><li>お客様「何かいいのあるかなと思って」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>5ステップ②ニーズの聞き出し:オープンクエスチョン、お手伝いしてよいかの許可</li>
+<li>見る・聞く・絞る。お客様のステージ(見る・選ぶ・迷う・決める)の「見る」段階として、時間をおく</li>
+<li>オーセンティックな立ち振る舞い:穏やか・親しみやすさ、クッション言葉「よろしければ」</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ありがとうございます、ぜひゆっくりご覧ください。よろしければ、普段はどんなキャップを被られることが多いですか?好みの形を教えていただければ、似た雰囲気のものもご紹介できます。何かあれば近くにおりますので、いつでもお声がけくださいね。ご自分のペースで選んでいただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"はい/いいえ"で終わらない質問、何て言う?」(→オープンクエスチョン)</li>
+<li>深掘り:「このあと、いつ・どんなきっかけでもう一度声をかける?」(→ステージが「選ぶ」「迷う」に変わったとき)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-03">2-03</a><a class="chip" href="#c-2-06">2-06</a></footer>
+</article>
+<article class="card" id="c-2-09" data-type="app">
+<header class="card-head">
+<span class="num">2-09</span><span class="badge app">応用</span>
+<h3>接客中に別のお客様から声をかけられたら</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「すみません、これのサイズ違いってありますか?」(別のお客様を接客中) どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「レジお願いできますか?」(接客中に)</li><li>お客様「ちょっと聞きたいことがあるんですけど」(接客中に)</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>複数接客:最初から1対2を想定。お客様のステージを読み、時間配分をコントロール</li>
+<li>お待たせする場合は時間の目処を伝え、約束の時間までに必ずコンタクトする</li>
+<li>接客中のお客様にもひと言(クッション言葉「恐れ入りますが」「少々お待ちくださいませ」)</li>
+<li>卓越したオペレーション:インカムで在庫を共有し、ランナーと連携</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「(接客中のお客様に)恐れ入ります、少しだけ失礼いたします。(声をかけてくださったお客様に)サイズ違いですね、ただいまお調べします。2〜3分ほどでお持ちしますので、少々お待ちくださいませ。お待ちの間、よろしければこちらを被ってみてください。被り心地を先に確かめていただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「お待たせするときに、何を伝えるんだった?」(→時間の目処)</li>
+<li>※「2〜3分ほど」はセリフの例。実際は売場の状況に合わせた目処を伝える</li>
+<li>深掘り:「約束した時間に戻れそうにないときは、どうする?」(→約束の時間までに必ずコンタクト)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-06">2-06</a></footer>
+</article>
+<article class="card" id="c-2-10" data-type="app">
+<header class="card-head">
+<span class="num">2-10</span><span class="badge app">応用</span>
+<h3>欲しいサイズの在庫がないとき</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「この59FIFTY、7 3/8ってありますか?」(店舗に在庫がない) どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「この色の、もうひとつ大きいサイズってあります?」</li><li>お客様「これと同じもので別のチームってありますか?」(在庫がない)</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q3・Service Standard)</small></h4><ul>
+<li>オーセンティックな立ち振る舞い:クッション言葉(申し訳ございませんが)+事実と代案をセットで</li>
+<li>5ステップ③解決策の提示:製品ではなく解決策を売る。添えない場合は対案。今買うより生涯の関係</li>
+<li>5ステップ④:機能ではなく、背景にあるメリットを語る</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「申し訳ございませんが、こちらの7 3/8はただいま店頭に在庫がございません。よろしければ、同じ形で近いカラーのものや、後ろでサイズを調整できる9FIFTYがあるか、お調べしますね。9FIFTYは形が59FIFTYに近いので、雰囲気はそのままに、ちょうどいいサイズ感で被っていただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"ない"と伝えるとき、何とセットで伝えるんだった?」(→代案)</li>
+<li>深掘り:「お客様が"どうしてもこの色が欲しい"と言われたら、どんな対案がある?」(→店舗の運用ルールに沿って案内)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-2-04">2-04</a><a class="chip" href="#c-3-02">3-02</a></footer>
+</article>
+</section><section class="chapter" id="ch3">
+<header class="ch-head"><span class="ch-no">第3章</span><h2>キャップの仕組み</h2><p class="lead">キャップの用語11語を、「対になる言葉とのちがい」で説明できるようにします。用語を言ったあとに「なので、〇〇です」とお客様のうれしさまで続けられることがゴールです。</p></header>
+<div class="set"><span>セットA</span><em>(3-01〜3-05)</em></div>
+<article class="card" id="c-3-01" data-type="def">
+<header class="card-head">
+<span class="num">3-01</span><span class="badge def">定義</span>
+<h3>トゥルーフィッテド</h3></header>
+<div class="q"><span class="label">問い</span><p>「トゥルーフィッテドって何?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「59FIFTYのサイズって、どうなってるの?」</li><li>「後ろに調整がないキャップって、どうやってサイズを選ぶの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8・シルエット基礎)</small></h4><ul>
+<li>サイズ調整のない仕様</li>
+<li>1cm刻みのサイズ展開のデザイン</li>
+<li>59FIFTY・Pre-Curved 59FIFTY・Low Profile 59FIFTY・Retro Crown 59FIFTYがトゥルーフィッテド</li>
+<li>名前の法則:数字が2桁(59FIFTY・49FORTY・39THIRTY・29TWENTY)→トゥルーフィッテド・フィッテド</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「トゥルーフィッテドは、後ろにサイズ調整がないかわりに、1cm刻みでサイズが細かく分かれているタイプです。なので、ご自身の頭のサイズに合うものを選んでいただけるので、ちょうどいいサイズで被っていただけます。よろしければ、一度サイズを測ってみましょうか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「59FIFTYの後ろを見てみて。何がない?」と実物を渡す</li>
+<li>深掘り:「名前の数字を見て、サイズ調整があるかないか見分けられる?」(→2桁はサイズ調整なし)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-04">3-04</a><a class="chip" href="#c-3-09">3-09</a><a class="chip" href="#c-10-01">10-01</a></footer>
+</article>
+<article class="card" id="c-3-02" data-type="def">
+<header class="card-head">
+<span class="num">3-02</span><span class="badge def">定義</span>
+<h3>アジャスタブル</h3></header>
+<div class="q"><span class="label">問い</span><p>「アジャスタブルって何?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「後ろで調整できるキャップのことを何て言う?」</li><li>「9FIFTYや9FORTYのサイズの仕組みは?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8・シルエット基礎)</small></h4><ul>
+<li>アジャスターがキャップ後部についている仕様</li>
+<li>細かいサイズ調整ができるオープンバックスタイルのデザイン</li>
+<li>アジャスタブルのベルトには、スナップバックとストラップバックがある</li>
+<li>名前の法則:数字が1桁(9FIFTY・9FORTY・9THIRTY・9TWENTY)→アジャスタブル</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「アジャスタブルは、キャップの後ろにアジャスターがついているタイプです。ご自身でサイズを細かく調整できるので、ちょうどいいサイズ感で被っていただけます。名前の数字が1桁のモデル、たとえば9FIFTYや9FORTYがこのタイプなので、売場でも見分けやすいですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「9FIFTYの後ろを見てみて。何がついている?」</li>
+<li>深掘り:「アジャスタブルのベルトは、何種類あった?」(→スナップバック、ストラップバック)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-05">3-05</a><a class="chip" href="#c-3-09">3-09</a></footer>
+</article>
+<article class="card" id="c-3-03" data-type="def">
+<header class="card-head">
+<span class="num">3-03</span><span class="badge def">定義</span>
+<h3>ストラクチャード</h3></header>
+<div class="q"><span class="label">問い</span><p>「ストラクチャードって何?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「フロントがしっかりしているキャップのことを何て言う?」</li><li>「59FIFTYの形がきれいに保てるのはなぜ?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8・シルエット基礎)</small></h4><ul>
+<li>フロントパネルの内側に芯が入っているモデル。立体的で、かっちりとしたシルエットを保つ</li>
+<li>型崩れしづらく、シルエットを保つことができる</li>
+<li>59FIFTY・9FIFTY・49FORTY・9FORTY・39THIRTYなどがストラクチャード</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ストラクチャードは、フロントの内側に芯が入っているタイプです。なので、型崩れしにくく、被ったときもかっちりとしたきれいなシルエットを保てます。こちらの59FIFTYもストラクチャードなので、形をきれいに見せたい方や、長くきれいに被りたい方におすすめです。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「キャップのフロントを指で押してみて。どうなってる?」</li>
+<li>深掘り:「芯が入っていると、お客様にとって何がうれしい?」(→型崩れしにくい)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-06">3-06</a></footer>
+</article>
+<article class="card" id="c-3-04" data-type="cmp">
+<header class="card-head">
+<span class="num">3-04</span><span class="badge cmp">比較</span>
+<h3>トゥルーフィッテドとフィッテド</h3></header>
+<div class="q"><span class="label">問い</span><p>「トゥルーフィッテドとフィッテド、違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「どっちもサイズ調整がないけど、何が違うの?」</li><li>「S</li><li>M</li><li>Lで選ぶのはどっち?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7)</small></h4><ul>
+<li>共通点:どちらもサイズ調整のない仕様</li>
+<li>トゥルーフィッテド:1cm刻みのサイズ展開</li>
+<li>フィッテド:S/M/Lなど、インチ表記ではない展開</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「どちらも後ろにサイズ調整がないタイプですが、サイズの分け方が違います。トゥルーフィッテドは1cm刻みで細かく分かれているので、ぴったりのサイズを選べます。フィッテドはS・M・Lのような分け方なので、大まかなサイズで気軽に選んでいただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「サイズの表記を見比べてみて。数字?アルファベット?」</li>
+<li>深掘り:「サイズをきっちり合わせたいお客様には、どっちをおすすめする?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-01">3-01</a></footer>
+</article>
+<article class="card" id="c-3-05" data-type="cmp">
+<header class="card-head">
+<span class="num">3-05</span><span class="badge cmp">比較</span>
+<h3>スナップバックとストラップバック</h3></header>
+<div class="q"><span class="label">問い</span><p>「スナップバックとストラップバック、違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「後ろがボタンのタイプとベルトのタイプ、何が違うの?」</li><li>「細かく調整できるのはどっち?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8)</small></h4><ul>
+<li>共通点:どちらもアジャスタブルのベルトのひとつ</li>
+<li>スナップバック:1cm刻みのボタンがついていて、7段階でサイズ調節が可能</li>
+<li>ストラップバック:ベルトが無段階で調節が可能</li>
+<li>9FORTYはストラップバックが面ファスナー仕様</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「どちらも後ろでサイズを調整できるタイプです。スナップバックはボタンで1cmずつ、7段階で調整できるので、毎回同じサイズにパチッと合わせられます。ストラップバックはベルトで段階なく調整できるので、ちょうどいいところに細かく合わせていただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「後ろを触ってみて。ボタン?ベルト?」</li>
+<li>深掘り:「スナップバックは何段階で調節できる?」(→7段階)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-02">3-02</a><a class="chip" href="#c-3-09">3-09</a></footer>
+</article>
+<div class="set"><span>セットB</span><em>(3-06〜3-10)</em></div>
+<article class="card" id="c-3-06" data-type="cmp">
+<header class="card-head">
+<span class="num">3-06</span><span class="badge cmp">比較</span>
+<h3>ストラクチャードとアンストラクチャード</h3></header>
+<div class="q"><span class="label">問い</span><p>「ストラクチャードとアンストラクチャード、違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「かっちりしたキャップと柔らかいキャップ、何が違うの?」</li><li>「9TWENTYと59FIFTY、フロントの作りはどう違う?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8・シルエット基礎)</small></h4><ul>
+<li>ストラクチャード:フロントパネルに芯があり立体的。型崩れしづらく、かっちりとしたシルエットを保つ</li>
+<li>アンストラクチャード:芯がなく柔らかい被り心地。ラフでカジュアルな印象</li>
+<li>アンストラクチャードのモデル:9TWENTY・9THIRTY・29TWENTY・CASUAL CLASSIC・Retro Crown 59FIFTY</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「違いはフロントの芯です。ストラクチャードはフロントに芯が入っているので、型崩れしにくく、かっちりした形が続きます。アンストラクチャードは芯がなく柔らかいので、ラフでカジュアルに被っていただけます。かっちり派か、ラフ派かで選んでいただくのがおすすめです。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「59FIFTYと9TWENTYのフロントを、両手で触り比べてみて」</li>
+<li>深掘り:「アンストラクチャードのモデルを2つ挙げて」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-03">3-03</a><a class="chip" href="#c-4-08">4-08</a><a class="chip" href="#c-4-09">4-09</a></footer>
+</article>
+<article class="card" id="c-3-07" data-type="cmp">
+<header class="card-head">
+<span class="num">3-07</span><span class="badge cmp">比較</span>
+<h3>フルクラウンとカーブドクラウン</h3></header>
+<div class="q"><span class="label">問い</span><p>「フルクラウンとカーブドクラウン、違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「59FIFTYと9FORTY、頭の部分の形はどう違う?」</li><li>「丸みのある形のクラウンは何て言う?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8・シルエット基礎)</small></h4><ul>
+<li>フルクラウン:独特の高く幅のあるフォルム(59FIFTY・Pre-Curved 59FIFTY・9FIFTY)</li>
+<li>カーブドクラウン:丸みを帯びたフォルムで、フロントからバックにかけてすっきりとしたシルエット(Low Profile 59FIFTY・9FORTY・9FORTY A-FRAME)</li>
+<li>Low Profile 59FIFTYは「低めのクラウンで、自然に馴染むフィット感」、9FORTYは「日常使いしやすい、すっきりした定番」</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「フルクラウンは、高さと幅のある、独特のフォルムで存在感が出ます。カーブドクラウンは丸みのある形で、前から後ろにかけてすっきりしているので、普段使いしやすい印象です。しっかり存在感を出したい方はフルクラウン、すっきり被りたい方はカーブドクラウンが選びやすいですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「59FIFTYと9FORTYを横から並べて見てみて」</li>
+<li>深掘り:「59FIFTYのサイズ感のまま、すっきり被りたいお客様には?」(→Low Profile 59FIFTY。4-13)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-06">4-06</a><a class="chip" href="#c-4-13">4-13</a></footer>
+</article>
+<article class="card" id="c-3-08" data-type="cmp">
+<header class="card-head">
+<span class="num">3-08</span><span class="badge cmp">比較</span>
+<h3>フラットバイザーとカーブドバイザー</h3></header>
+<div class="q"><span class="label">問い</span><p>「フラットバイザーとカーブドバイザー、違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「つばがまっすぐなのと曲がっているの、何て言う?」</li><li>「59FIFTYとPre-Curved 59FIFTYのつばの違いは?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8・シルエット基礎)</small></h4><ul>
+<li>フラットバイザー:平らなバイザー。好みに合わせて曲げることもできる</li>
+<li>カーブドバイザー:あらかじめ曲がっているバイザー</li>
+<li>Pre-Curved 59FIFTYは59FIFTYの基本を残し、バイザーをあらかじめカーブ。バイザーの芯がプラスチック</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「フラットバイザーはつばがまっすぐなタイプで、お好みに合わせてご自身で曲げることもできます。カーブドバイザーは最初から曲がっているので、買ってすぐに自然なカーブで被っていただけます。まっすぐのまま被るか、カーブで被るか、お好みのスタイルで選んでいただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「つばを横から見てみて。まっすぐ?曲がってる?」</li>
+<li>深掘り:「フラットバイザーの"うれしいところ"をもう1つ言うと?」(→好みに合わせて曲げられる)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-10">3-10</a></footer>
+</article>
+<article class="card" id="c-3-09" data-type="app">
+<header class="card-head">
+<span class="num">3-09</span><span class="badge app">応用</span>
+<h3>被るたびにサイズを合わせ直したくない</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「後ろで調整できるタイプがいいんですけど、被るたびにサイズを合わせ直すのは面倒で…」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「毎回同じサイズでパチッと留められるのがいいんです」</li><li>お客様「後ろがボタンのとベルトの、どっちがいいですか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8)</small></h4><ul>
+<li>スナップバック:1cm刻みのボタンがついていて、7段階でサイズ調節が可能</li>
+<li>ストラップバック:ベルトが無段階で調節が可能 → 細かく合わせたい方に</li>
+<li>サイズ調整そのものがいらない方には、トゥルーフィッテド(サイズ調整のない仕様、1cm刻みのサイズ展開)という選び方もある</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、後ろがボタンで留まるスナップバックのタイプがおすすめです。1cm刻みのボタンで7段階に調整できるので、一度ちょうどいい位置が決まれば、同じボタンで留めるだけで被っていただけます。もっと細かく合わせたい方には、ベルトで段階なく調整できるストラップバックもありますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「後ろがボタンのタイプとベルトのタイプ、名前は?」</li>
+<li>深掘り:「"サイズ調整自体いらない、ぴったりのものがいい"と言われたら?」(→トゥルーフィッテド。3-01)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-01">3-01</a><a class="chip" href="#c-3-02">3-02</a><a class="chip" href="#c-3-05">3-05</a></footer>
+</article>
+<article class="card" id="c-3-10" data-type="app">
+<header class="card-head">
+<span class="num">3-10</span><span class="badge app">応用</span>
+<h3>つばを曲げてもいいか聞かれたら</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「この59FIFTY、つばがまっすぐなのがちょっと気になってて…これって曲げてもいいんですか?」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「つばって自分で曲げていいんですか?」</li><li>お客様「平らなつばのまま被るものなんですか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8・シルエット基礎)</small></h4><ul>
+<li>フラットバイザー:平らなバイザー。好みに合わせて曲げることもできる</li>
+<li>最初から曲がったつばがよければ、カーブドバイザー(あらかじめ曲がっているバイザー)のモデル:Pre-Curved 59FIFTY・Low Profile 59FIFTY・9FORTYなど</li>
+<li>59FIFTYの形のままカーブがよければPre-Curved 59FIFTY(59FIFTYの基本を残し、バイザーをあらかじめカーブ)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「はい、59FIFTYのつばはフラットバイザーといって、お好みに合わせて曲げていただくこともできるんです。なので、まっすぐのままでも、カーブをつけても、お好みのスタイルで被っていただけます。最初から曲がったつばがよければ、59FIFTYの形のままつばがカーブしたPre-Curved 59FIFTYもありますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「59FIFTYのつばの名前と、その特徴は?」</li>
+<li>深掘り:「"自分で曲げるのはちょっと不安"と言われたら?」(→Pre-Curved 59FIFTY。4-12)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-08">3-08</a><a class="chip" href="#c-4-12">4-12</a></footer>
+</article>
+</section><section class="chapter" id="ch4">
+<header class="ch-head"><span class="ch-no">第4章</span><h2>シルエットの選び方</h2><p class="lead">モデル名を「覚えている」から、お客様の一言を聞いて「この方にはこれ」と選び、理由をお客様のメリットまで言える状態へ。59FIFTYを基準に、何が違うかを比べられるようにします。</p></header>
+<div class="flow"><p>基準の4つの仕様(Q8):①サイズの合わせ方(トゥルーフィッテド/アジャスタブル)②フロントの芯(ストラクチャード/アンストラクチャード)③クラウンの形(フルクラウン/カーブドクラウン)④つばの形(フラットバイザー/カーブドバイザー)。迷ったらこの4つの順に考えると、どのモデルも説明できます。</p>
+<p>深さの目安(シルエット基礎。深い順):59FIFTY・9FIFTY・Pre-Curved 59FIFTY → 9FORTY A-FRAME → Low Profile 59FIFTY・Retro Crown 59FIFTY → 9FORTY・9THIRTY → CASUAL CLASSIC → 9TWENTY。※あくまで目安です。素材・サイズ・頭の形でフィット感は変わるので、最後は被り比べで確かめます。</p></div>
+<div class="set"><span>セットA</span><em>(4-01〜4-05)</em></div>
+<article class="card" id="c-4-01" data-type="def">
+<header class="card-head">
+<span class="num">4-01</span><span class="badge def">定義</span>
+<h3>59FIFTYを4つの仕様で説明する</h3></header>
+<div class="q"><span class="label">問い</span><p>「59FIFTYってどんなキャップ?4つの仕様で教えて。」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「ニューエラの代表モデルってどれ?どういう形?」</li><li>「59FIFTYの特徴をお客様に一言で言うと?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・シルエット基礎)</small></h4><ul>
+<li>トゥルーフィッテド:サイズ調整のない仕様で、1cm刻みのサイズ展開</li>
+<li>ストラクチャード:フロントパネルの内側に芯が入っていて、型崩れしづらく、シルエットを保てる</li>
+<li>フルクラウン:独特の高く幅のあるフォルム。深さの目安ではいちばん深いグループ</li>
+<li>フラットバイザー:平らなつば。好みに合わせて曲げることもできる</li>
+<li>一言でいうと:代表モデル。型崩れしにくく、クラシックな印象</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「59FIFTYはニューエラの代表モデルで、頭のサイズにぴったり合うものを1cm刻みで選んでいただくタイプです。フロントに芯が入っているので型崩れしにくく、高さと幅のあるクラシックな形をきれいに保てます。つばは平らですが、お好みで曲げていただくこともできますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「サイズ・芯・クラウン・つば、の順で言ってみて」と4つの入口だけ渡す</li>
+<li>深掘り:「その中で、お客様がいちばん"嬉しい"のはどれだと思う?理由も」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-02">4-02</a><a class="chip" href="#c-4-04">4-04</a><a class="chip" href="#c-4-05">4-05</a><a class="chip" href="#c-3-01">3-01</a><a class="chip" href="#c-3-03">3-03</a></footer>
+</article>
+<article class="card" id="c-4-02" data-type="def">
+<header class="card-head">
+<span class="num">4-02</span><span class="badge def">定義</span>
+<h3>名前の数字でわかること</h3></header>
+<div class="q"><span class="label">問い</span><p>「キャップの名前の数字を見るだけで、何がわかる?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「59FIFTYと9FIFTY、"5"があるかないかで何が違うの?」</li><li>「9TWENTYと9FORTY、名前だけでどっちが深いかわかる?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:シルエット基礎「キャップ名の法則」)</small></h4><ul>
+<li>数字が2桁(59FIFTYなど)→ トゥルーフィッテド・フィッテド(サイズ調整なし)</li>
+<li>数字が1桁(9FIFTY・9FORTY・9THIRTY・9TWENTYなど)→ アジャスタブル(サイズ調整できる)</li>
+<li>TWENTY→THIRTY→FORTY→FIFTYの順に深くなる(数字が大きいほどクラウンが深い)</li>
+<li>※深さはあくまで目安。最後は被り比べで確かめる</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「名前を見ると、選ぶヒントがわかるんです。数字が2桁の59FIFTYはサイズをぴったり選ぶタイプ、1桁の9FIFTYや9TWENTYは後ろで調整できるタイプです。それから、TWENTY、THIRTY、FORTY、FIFTYの順に深くなります。なので、名前を見るだけで、ご希望に近いものから試していただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「59FIFTYと9FIFTYを並べて、名前で違うのはどこ?」</li>
+<li>深掘り:「"浅めで、サイズ調整できるのがいい"と言われたら、名前で何を探す?」(→1桁でTWENTY=9TWENTY)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-01">4-01</a><a class="chip" href="#c-4-04">4-04</a><a class="chip" href="#c-4-09">4-09</a></footer>
+</article>
+<article class="card" id="c-4-03" data-type="def">
+<header class="card-head">
+<span class="num">4-03</span><span class="badge def">定義</span>
+<h3>CASUAL CLASSICはどんなキャップ?</h3></header>
+<div class="q"><span class="label">問い</span><p>「CASUAL CLASSICの特徴を、ほかのモデルと見分けられるポイントで教えて。」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「CASUAL CLASSICって9TWENTYと何が違うの?」</li><li>「フロントにステッチがないこのキャップは何?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・シルエット基礎)</small></h4><ul>
+<li>アジャスタブル/アンストラクチャード(フロントに芯がなく柔らかい)/カーブドバイザー(やや下向き)</li>
+<li>一言でいうと:軽量・柔らかく、イージースナップ仕様(スナップボタンがある)</li>
+<li>フロントステッチがない/スウェットバンドにコットンツイルを採用</li>
+<li>サイズが9TWENTYや9THIRTYに比べ1cm小さい</li>
+<li>深さの目安:9THIRTYより浅く、9TWENTYより深い</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「CASUAL CLASSICは、軽くてフロントに芯がない柔らかいキャップです。フロントにステッチがなく、つばはやや下向き、後ろはスナップボタンで調整できます。9TWENTYや9THIRTYより1cm小さめに作られているので、それらだと少し大きく感じる方にも合わせやすいモデルです。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「フロント・つば・後ろ・内側、の順に実物を触って説明してみて」</li>
+<li>深掘り:「"1cm小さい"は、どんなお客様のお役に立つ?」(→4-14)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-08">4-08</a><a class="chip" href="#c-4-14">4-14</a></footer>
+</article>
+<article class="card" id="c-4-04" data-type="cmp">
+<header class="card-head">
+<span class="num">4-04</span><span class="badge cmp">比較</span>
+<h3>59FIFTYと9FIFTYの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「59FIFTYと9FIFTY、違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「9FIFTYって59FIFTYのサイズ調整版?」</li><li>「形は同じなの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・シルエット基礎)</small></h4><ul>
+<li>どちらもストラクチャード・フルクラウン・フラットバイザー。深さの目安も同じグループ</li>
+<li>9FIFTYの一言:59FIFTYに近い形で、サイズ調整できる</li>
+<li>違いはサイズの合わせ方:59FIFTYはトゥルーフィッテド(サイズ調整のない仕様で、1cm刻みのサイズ展開)、9FIFTYはアジャスタブル(キャップ後部のアジャスターで細かいサイズ調整ができる)</li>
+<li>名前の法則:2桁=サイズ調整なし、1桁=アジャスタブル</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「形はほぼ同じで、どちらもフロントに芯が入っているので形がきれいに保てるモデルです。違いはサイズの合わせ方です。59FIFTYは頭のサイズにぴったりのものを選んでいただくタイプ、9FIFTYは後ろで調整できるタイプなので、被りながらサイズ感を細かく合わせていただけるのが便利なところです。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「後ろを見てみて?」と実物を2つ渡す</li>
+<li>深掘り:「じゃあ、ギフトで頭のサイズがわからない時はどっちを勧める?」(→4-11)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-01">4-01</a><a class="chip" href="#c-4-02">4-02</a><a class="chip" href="#c-4-11">4-11</a><a class="chip" href="#c-10-01">10-01</a></footer>
+</article>
+<article class="card" id="c-4-05" data-type="cmp">
+<header class="card-head">
+<span class="num">4-05</span><span class="badge cmp">比較</span>
+<h3>59FIFTYとPre-Curved 59FIFTYの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「59FIFTYとPre-Curved 59FIFTY、どこが違う?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「"プレカーブ"って何がカーブしてるの?」</li><li>「59FIFTYのつばを曲げたら同じになる?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・シルエット基礎)</small></h4><ul>
+<li>共通:トゥルーフィッテド/ストラクチャード/フルクラウン。深さの目安も同じグループ</li>
+<li>一言でいうと:59FIFTYの基本を残し、バイザーをあらかじめカーブ</li>
+<li>違いはつば:59FIFTYはフラットバイザー(好みで曲げることもできる)、Pre-Curved 59FIFTYはカーブドバイザー(あらかじめ曲がっている)</li>
+<li>Pre-Curved 59FIFTYはバイザーの芯がプラスチック</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「Pre-Curved 59FIFTYは、59FIFTYの形やサイズの選び方はそのままで、つばだけ最初から曲がった状態で作られているモデルです。なので、ご自分で曲げなくても、買ったその日から曲がったつばで被っていただけます。59FIFTYのほうは平らなつばを、お好みの角度に曲げていただくこともできますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「名前の"Pre-Curved"、日本語にするとどういう意味だと思う?」</li>
+<li>深掘り:「"つばは曲げたいけど、自分でやるのは不安"というお客様には?」(→4-12)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-01">4-01</a><a class="chip" href="#c-4-12">4-12</a><a class="chip" href="#c-3-10">3-10</a></footer>
+</article>
+<div class="set"><span>セットB</span><em>(4-06〜4-10)</em></div>
+<article class="card" id="c-4-06" data-type="cmp">
+<header class="card-head">
+<span class="num">4-06</span><span class="badge cmp">比較</span>
+<h3>Low Profile 59FIFTYとRetro Crown 59FIFTYの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「Low Profile 59FIFTYとRetro Crown 59FIFTY、59FIFTYとの違いも入れて説明すると?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「59FIFTYより浅めで、サイズ調整がないのはどれ?それぞれの違いは?」</li><li>「Retro Crownって、Low Profileと同じ?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・シルエット基礎)</small></h4><ul>
+<li>共通:どちらもトゥルーフィッテド(サイズ調整のない仕様、1cm刻みのサイズ展開)。深さの目安はほぼ同じで、59FIFTYより浅いグループ</li>
+<li>Low Profile 59FIFTY:ストラクチャード(芯あり)/カーブドクラウン/カーブドバイザー。一言でいうと「低めのクラウンで、自然に馴染むフィット感」</li>
+<li>Retro Crown 59FIFTY:アンストラクチャード(フロントに芯がなく柔らかい)/59FIFTYに比べ少しクラウンが低い。一言でいうと「丸みのあるレトロクラウンで、ヴィンテージな印象」</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「どちらもサイズをぴったり選んでいただくタイプで、59FIFTYより浅めに被れます。Low Profile 59FIFTYはフロントに芯が入った低めのクラウンなので、頭に自然に馴染むフィット感です。Retro Crown 59FIFTYはフロントに芯がなく柔らかく、丸みのあるクラウンなので、ヴィンテージな雰囲気を楽しんでいただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「フロントを指で軽く押してみて。違いはある?」と2つを手渡す</li>
+<li>深掘り:「2つのうちどちらを先に渡すか、お客様に何を聞いて決める?」(→芯あり/なしの好み)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-01">4-01</a><a class="chip" href="#c-4-13">4-13</a></footer>
+</article>
+<article class="card" id="c-4-07" data-type="cmp">
+<header class="card-head">
+<span class="num">4-07</span><span class="badge cmp">比較</span>
+<h3>9FORTYと9FORTY A-FRAMEの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「9FORTYと9FORTY A-FRAME、並べたらお客様にどこを見てもらう?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「どっちも9FORTYなのに、何が違うの?」</li><li>「A-FRAMEって何がAなの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・シルエット基礎)</small></h4><ul>
+<li>共通:アジャスタブル/ストラクチャード/カーブドクラウン/カーブドバイザー</li>
+<li>9FORTY:日常使いしやすい、すっきりした定番。ストラップバックが面ファスナー仕様</li>
+<li>9FORTY A-FRAME:5枚パネルで構成され、フロント部分がつままれたような形状が特徴</li>
+<li>深さの目安:A-FRAMEのほうが深い(9FORTYは9THIRTYと同じくらい)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「どちらもフロントに芯が入っていて、つばがカーブした、サイズ調整できるタイプです。9FORTYはすっきりした定番の形で、後ろが面ファスナーなので普段使いでさっと合わせられます。A-FRAMEは5枚パネルで、フロントがつままれたような形が特徴です。深さも少しあるので、しっかり被りたい方はA-FRAMEも試してみてください。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「2つを正面から並べて、フロントのパネルの数を数えてみて」</li>
+<li>深掘り:「"9FORTYだと少し浅い"と言われたら、同じ9FORTYの仲間で何を渡す?」(→A-FRAME)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-11">4-11</a><a class="chip" href="#c-4-15">4-15</a></footer>
+</article>
+<article class="card" id="c-4-08" data-type="cmp">
+<header class="card-head">
+<span class="num">4-08</span><span class="badge cmp">比較</span>
+<h3>9TWENTY・9THIRTY・CASUAL CLASSICの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「フロントが柔らかい3つ、9TWENTY・9THIRTY・CASUAL CLASSICの違いを一言ずつで言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「柔らかいキャップってどれも同じ?」</li><li>「9THIRTYって9TWENTYと何が違うの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・シルエット基礎)</small></h4><ul>
+<li>共通:アジャスタブル/アンストラクチャード(フロントに芯がなく柔らかい)/カーブドバイザー</li>
+<li>深さの目安:9THIRTY(深め)→ CASUAL CLASSIC → 9TWENTY(浅め)</li>
+<li>9TWENTY:浅めで柔らかい、カジュアルな被り心地</li>
+<li>9THIRTY:柔らかく、9TWENTYよりも深め。59FIFTYのバイザーを使用</li>
+<li>CASUAL CLASSIC:軽量・柔らかく、イージースナップ仕様。フロントステッチがなく、バイザーがやや下向き。9TWENTYや9THIRTYに比べサイズが1cm小さい</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「3つともフロントに芯がなく柔らかいので、ラフに被っていただけます。9TWENTYは浅めでカジュアルな被り心地、9THIRTYはいちばん深めで、つばは59FIFTYと同じものです。CASUAL CLASSICはその間くらいの深さで、軽くて少し小さめの作りです。深さのお好みで選んでいただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「深さで並べるとどの順?」から入る</li>
+<li>深掘り:「"深めに、でも柔らかいのがいい"と言われたら、どれを先に渡す?」(→9THIRTY)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-03">4-03</a><a class="chip" href="#c-4-09">4-09</a><a class="chip" href="#c-4-14
+
+> **ここから【応用】**:お客様の一言から始まります。練習する人は「モデル名」+「理由」+「お客様のメリット」の3つを入れて答えるのが目安です。商品を手に取ってOK。">4-14
+
+&gt; **ここから【応用】**:お客様の一言から始まります。練習する人は「モデル名」+「理由」+「お客様のメリット」の3つを入れて答えるのが目安です。商品を手に取ってOK。</a></footer>
+</article>
+<article class="card" id="c-4-09" data-type="app">
+<header class="card-head">
+<span class="num">4-09</span><span class="badge app">応用</span>
+<h3>かっちりしたキャップが苦手なお客様</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「キャップってかっちりしすぎて、自分には似合わない気がするんですよね。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「もっとラフに被れるのない?」</li><li>お客様「柔らかいキャップってある?」</li><li>お客様「浅めに軽く被れるのがいいな」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8・シルエット基礎)</small></h4><ul>
+<li>アンストラクチャード(芯がなく柔らかい被り心地。ラフでカジュアルな印象)の9TWENTY/9THIRTY/CASUAL CLASSIC</li>
+<li>9TWENTYは浅めで柔らかい、カジュアルな被り心地。9THIRTYは9TWENTYよりも深め → 深さの好みで選び分ける</li>
+<li>1つに決めつけず、2つ被り比べてもらう</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、フロントに芯がなく柔らかい9TWENTYはいかがでしょう。かっちりしすぎず、ラフでカジュアルに被っていただけます。浅めがお好みなら9TWENTY、もう少し深く被りたい方には9THIRTYがおすすめなので、両方被り比べてみませんか?鏡で見比べると、しっくりくる方がわかりやすいですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「フロントの芯の話、覚えてる?」</li>
+<li>深掘り:「"深めに被りたい"と言われたら?」(→9THIRTY)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-02">4-02</a><a class="chip" href="#c-4-08">4-08</a><a class="chip" href="#c-4-14">4-14</a></footer>
+</article>
+<article class="card" id="c-4-10" data-type="app">
+<header class="card-head">
+<span class="num">4-10</span><span class="badge app">応用</span>
+<h3>髪型がよく変わるお客様の次の1つ</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「髪を切ったり伸ばしたりよくするので、そのたびに59FIFTYのサイズ感が変わっちゃうんです。次に買うなら、どれがいいですか?」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「髪型が変わってもサイズを合わせられるキャップってある?」</li><li>お客様「59FIFTYっぽい形で、後からサイズを合わせられるのは?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・Q13・シルエット基礎)</small></h4><ul>
+<li>アジャスタブル(キャップ後部のアジャスターで細かいサイズ調整ができる)のモデルを提案。名前の数字が1桁のもの</li>
+<li>59FIFTYの形が好きなら9FIFTY(59FIFTYに近い形で、サイズ調整できる)</li>
+<li>59FIFTYはトゥルーフィッテド(サイズ調整のない仕様)。お持ちの59FIFTYは、サイズアジャスティングテープで最適なサイズ感に調整できる(7-09)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、後ろでサイズを調整できる9FIFTYはいかがでしょう。59FIFTYに近い形なので雰囲気はそのままで、髪型が変わってもご自身でサイズを合わせ直していただけます。お持ちの59FIFTYも、サイズアジャスティングテープでちょうどいいサイズ感に調整できるので、両方使い分けていただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「59FIFTYって、サイズ調整できるタイプだっけ?後から合わせられるのはどの仕様?」</li>
+<li>深掘り:「"今持っている59FIFTYはどうしたらいい?"と聞かれたら?」(→サイズアジャスティングテープ。7-09)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-02">4-02</a><a class="chip" href="#c-4-04">4-04</a><a class="chip" href="#c-7-03">7-03</a><a class="chip" href="#c-7-09">7-09</a></footer>
+</article>
+<div class="set"><span>セットC</span><em>(4-11〜4-15)</em></div>
+<article class="card" id="c-4-11" data-type="app">
+<header class="card-head">
+<span class="num">4-11</span><span class="badge app">応用</span>
+<h3>プレゼントで相手の頭のサイズがわからない</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「プレゼントにしたいんですけど、相手の頭のサイズがわからなくて…」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「父の誕生日に贈りたいけど、サイズって測れないし」</li><li>お客様「サイズで失敗したくないんですよね」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q7・Q8・シルエット基礎)</small></h4><ul>
+<li>アジャスタブル(キャップ後部のアジャスターで細かいサイズ調整ができる)のモデルを提案。名前の数字が1桁のもの:9FIFTY/9FORTY/9FORTY A-FRAME/9THIRTY/9TWENTY 等</li>
+<li>相手の方の普段のスタイルで選び分け:59FIFTYのような形が好きなら9FIFTY(59FIFTYに近い形)、普段使いなら9FORTY(日常使いしやすい、すっきりした定番)、柔らかい被り心地なら9TWENTY・9THIRTY</li>
+<li>59FIFTYなどトゥルーフィッテドはサイズ選びが必要なことを、理由として添える</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、後ろでサイズ調整ができるタイプがおすすめです。被る方がご自分でサイズを合わせられるので、サイズがわからなくても安心して贈っていただけます。普段使いなら定番の9FORTY、59FIFTYのような形がお好きな方なら9FIFTYなど、相手の方の普段のスタイルから一緒に選びましょうか。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「サイズを"選ぶ"タイプと"調整する"タイプ、どっちが安心?」</li>
+<li>深掘り:「相手の方の好みを知るために、お客様にどんな質問をする?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-02">4-02</a><a class="chip" href="#c-4-04">4-04</a><a class="chip" href="#c-4-07">4-07</a></footer>
+</article>
+<article class="card" id="c-4-12" data-type="app">
+<header class="card-head">
+<span class="num">4-12</span><span class="badge app">応用</span>
+<h3>59FIFTYの形で、つばは曲がっている方がいい</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「59FIFTYの形は好きなんですけど、つばは曲がってる方が好みで…自分で曲げるのはちょっと不安です。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「最初からつばがカーブしてる59FIFTYってある?」</li><li>お客様「平らなつばがちょっと苦手で」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・シルエット基礎)</small></h4><ul>
+<li>Pre-Curved 59FIFTY:59FIFTYの基本(トゥルーフィッテド・ストラクチャード・フルクラウン)を残し、バイザーをあらかじめカーブ</li>
+<li>バイザーの芯がプラスチック</li>
+<li>補足:59FIFTYのフラットバイザーも、好みに合わせて曲げることはできる</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、Pre-Curved 59FIFTYがぴったりだと思います。59FIFTYと同じ、フロントに芯が入った高さのあるシルエットのまま、つばだけ最初から曲がった状態で作られています。なので、ご自分で曲げなくても、お好みの曲がったつばですぐに被っていただけます。サイズは59FIFTYと同じく、ぴったりのものを一緒に選びましょう。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「59FIFTYの仲間で、つばが最初から曲がっているのは?」</li>
+<li>深掘り:「"自分で曲げてみたい"というお客様には、どう答える?」(→59FIFTYのフラットバイザーは曲げることもできる)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-05">4-05</a><a class="chip" href="#c-3-10">3-10</a></footer>
+</article>
+<article class="card" id="c-4-13" data-type="app">
+<header class="card-head">
+<span class="num">4-13</span><span class="badge app">応用</span>
+<h3>59FIFTYより浅く、サイズはぴったりがいい</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「59FIFTYって、自分には深くて高さが出すぎる気がするんですよね。サイズはぴったりのを選びたいんですけど。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「あまり深く被りたくないんです」</li><li>お客様「サイズ調整なしで、もう少し浅いのは?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・シルエット基礎)</small></h4><ul>
+<li>59FIFTYはフルクラウン(独特の高く幅のあるフォルム)で、深さの目安はいちばん深いグループ</li>
+<li>Low Profile 59FIFTY:低めのクラウンで、自然に馴染むフィット感。芯あり</li>
+<li>Retro Crown 59FIFTY:59FIFTYに比べ少しクラウンが低い。丸みのあるレトロクラウンで、ヴィンテージな印象。フロントに芯がなく柔らかい</li>
+<li>どちらもトゥルーフィッテドで、59FIFTYより浅いグループ → 「サイズはぴったり選びたい」「深すぎない」の両方に合う</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、Low Profile 59FIFTYはいかがでしょう。59FIFTYよりクラウンが低めなので、深くなりすぎず、頭に自然に馴染むフィット感です。柔らかい被り心地がお好きなら、ヴィンテージな雰囲気のRetro Crown 59FIFTYもあります。どちらもサイズはぴったり選べるので、被り比べてみませんか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「59FIFTYの仲間で、クラウンが低めなのはどれだった?」</li>
+<li>深掘り:「"深くないのがいい、でもサイズ調整もしたい"と言われたら?」(→名前が1桁で浅め:9TWENTYなど。4-02)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-02">4-02</a><a class="chip" href="#c-4-06">4-06</a></footer>
+</article>
+<article class="card" id="c-4-14" data-type="app">
+<header class="card-head">
+<span class="num">4-14</span><span class="badge app">応用</span>
+<h3>9TWENTYの柔らかさで、もう少し小さめがいい</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「この9TWENTY、柔らかい感じはすごく好きなんですけど、一番小さくしてもちょっと大きいかも…」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「柔らかいキャップで、もう少し小さめのってある?」</li><li>お客様「調整しても浮いちゃう感じがする」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・Q13・シルエット基礎)</small></h4><ul>
+<li>CASUAL CLASSIC:9TWENTYや9THIRTYに比べサイズが1cm小さい</li>
+<li>同じアジャスタブル・アンストラクチャード(フロントに芯がなく柔らかい)・カーブドバイザーなので、好きな柔らかさはそのまま。軽量</li>
+<li>違い:フロントステッチがなく、バイザーがやや下向き。後ろはスナップボタン(イージースナップ仕様)。深さの目安は9TWENTYより少し深い</li>
+<li>補足の選択肢:サイズアジャスティングテープで被り心地を調整する方法もある</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、CASUAL CLASSICを一度被ってみてください。9TWENTYと同じくフロントに芯がなく柔らかいタイプで、サイズが1cm小さめに作られています。なので、柔らかい被り心地はそのままで、ぴったり感に近づけていただけます。軽くて、フロントにステッチがないのも特徴ですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「柔らかい3つの中で、サイズが小さめなのはどれだった?」</li>
+<li>深掘り:「CASUAL CLASSICの後ろの調整は、何でできている?」(→スナップボタン)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-03">4-03</a><a class="chip" href="#c-4-08">4-08</a><a class="chip" href="#c-7-03">7-03</a></footer>
+</article>
+<article class="card" id="c-4-15" data-type="app">
+<header class="card-head">
+<span class="num">4-15</span><span class="badge app">応用</span>
+<h3>初めてキャップを買うお客様</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「キャップって初めて買うんですけど、種類が多くてどれがいいかわからなくて…」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「おすすめってどれですか?」</li><li>お客様「違いがよくわからないんですけど」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q8・Q7・シルエット基礎)</small></h4><ul>
+<li>1つに決めつけず、仕様を「お客様の好み」に置き換えて質問する</li>
+<li>かっちりした形(芯あり)か、柔らかい形(芯なし)か</li>
+<li>深く被りたいか、浅めがいいか</li>
+<li>サイズはぴったり選ぶか、後ろで調整するか</li>
+<li>答えに合わせて、対照的な2つ(例:代表モデルの59FIFTYと、浅めで柔らかい9TWENTY)を被り比べてもらうと、好みがはっきりする</li>
+<li>普段使いを聞かれたら:9FORTYは日常使いしやすい、すっきりした定番</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「選ぶポイントは3つなので、一緒に決めていきましょう。形がかっちりか柔らかいか、深めか浅めか、サイズをぴったり選ぶか後ろで調整するか、です。まずは、かっちりした59FIFTYと、浅めで柔らかい9TWENTYを被り比べてみませんか?被ってみると、ご自分の好みがすぐわかりますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「4つの仕様のうち、お客様に聞きやすいのはどれ?」</li>
+<li>深掘り:「お客様が"柔らかい方がいい、でも深めがいい"と答えたら、次に何を渡す?」(→9THIRTY)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-4-01">4-01</a><a class="chip" href="#c-4-02">4-02</a><a class="chip" href="#c-4-07">4-07</a><a class="chip" href="#c-4-08">4-08</a><a class="chip" href="#c-4-11">4-11</a></footer>
+</article>
+</section><section class="chapter" id="ch5">
+<header class="ch-head"><span class="ch-no">第5章</span><h2>キャップ以外のヘッドウェア・キッズ</h2><p class="lead">キャップ以外のハット・ニット等を「ニット系・バケット系・キャップ系」の3系統でとらえ、「どんな場面・どんな方に合うか」から逆引きで選べるようにする。キッズは年齢からすぐサイズを案内できることがゴール。</p></header>
+<div class="set"><span>セットA</span><em>(5-01〜5-05)</em></div>
+<article class="card" id="c-5-01" data-type="def">
+<header class="card-head">
+<span class="num">5-01</span><span class="badge def">定義</span>
+<h3>Bucket-01ってどんな帽子?</h3></header>
+<div class="q"><span class="label">問い</span><p>「Bucket-01ってどんな帽子?お客様に一言で紹介してみて」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「バケットハットってどういう形?」</li><li>「Bucket-02と03は何が違うの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q9・その他シルエット)</small></h4><ul>
+<li>バケツをひっくり返したようなシルエットが特徴の、アウトドア系ハット(バケット系)。気軽に被れる王道のバケットハット</li>
+<li>ブリムの短いBucket-02、ブリムの長いBucket-03もラインナップしている</li>
+<li>接客ワード:「気軽に被れて小顔見えも。ブリムの長さで印象を選べます。」</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「こちらはBucket-01で、バケツをひっくり返したような形の、気軽に被れる定番のバケットハットです。小顔に見える効果も期待できますよ。ブリムが短めのBucket-02、長めのBucket-03もあるので、つばの長さで印象を選んでいただけます。ぜひ被り比べてみてください。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:実物を逆さにして見せ、「何をひっくり返した形に見える?」</li>
+<li>深掘り:「つばが短いのと長いの、名前は?」(→短いBucket-02/長いBucket-03)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-03">5-03</a><a class="chip" href="#c-5-04">5-04</a><a class="chip" href="#c-5-06">5-06</a></footer>
+</article>
+<article class="card" id="c-5-02" data-type="def">
+<header class="card-head">
+<span class="num">5-02</span><span class="badge def">定義</span>
+<h3>キッズの3サイズ</h3></header>
+<div class="q"><span class="label">問い</span><p>「キッズのサイズは何種類?名前と対象年齢をセットで言ってみて」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「My 1stって何歳向け?」</li><li>「Youthは何歳まで?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q14)</small></h4><ul>
+<li>My 1st:0〜2歳</li>
+<li>Child:2〜6歳</li>
+<li>Youth:6〜15歳</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「キッズは年齢に合わせて3つのサイズがございます。0〜2歳向けのMy 1st、2〜6歳向けのChild、6〜15歳向けのYouthです。お子さんの年齢を教えていただければ、どのサイズから見ればよいかすぐにご案内できるので、プレゼント選びでも安心してお選びいただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「赤ちゃん・小さい子・小中学生の3段階で思い出してみて」</li>
+<li>深掘り:「6歳のお子さんだったら、どう案内する?」(→ChildとYouthの境目。両方を見比べていただく)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-08">5-08</a></footer>
+</article>
+<article class="card" id="c-5-03" data-type="cmp">
+<header class="card-head">
+<span class="num">5-03</span><span class="badge cmp">比較</span>
+<h3>3つの系統で分けてみよう</h3></header>
+<div class="q"><span class="label">問い</span><p>「キャップ以外のヘッドウェア、ニット系・バケット系・キャップ系の3つに分けて、それぞれどのモデルが入るか言ってみて」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「バケット系ってどのモデル?」</li><li>「キャップに近い形のハット系の帽子は?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:その他シルエット・Q9)</small></h4><ul>
+<li>ニット系:Knits(防寒の定番、バリエーション豊富)</li>
+<li>バケット系:Bucket-01、Adventure、Explorer(アウトドア向け)/Beret、Casquette、Sailor Brim(きれいめ・個性派)</li>
+<li>キャップ系:WM-01、Jet Cap(バイザーのあるキャップ型)</li>
+<li>見どころはパネル数・ブリム・クラウン・サイズ調整。用途は防寒・アウトドア・きれいめ・ストリート</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「キャップ以外の帽子は、大きく3つの系統に分かれます。防寒にぴったりなニット系、アウトドア向けのBucket-01やきれいめのBeretなどのバケット系、WM-01やJet Capのように、キャップに近い感覚で被れるキャップ系です。使う場面を教えていただければ、どの系統から見るとよいかご案内できますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「まず"寒いとき用"はどれ?次にWM-01とJet Capはどの系統?残りは全部バケット系だよ」</li>
+<li>深掘り:「モデルを見比べるとき、どこを見てもらう?」(→パネル数・ブリム・クラウン・サイズ調整)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-01">5-01</a><a class="chip" href="#c-5-04">5-04</a><a class="chip" href="#c-5-05">5-05</a><a class="chip" href="#c-5-07">5-07</a><a class="chip" href="#c-5-09">5-09</a><a class="chip" href="#c-5-10">5-10</a></footer>
+</article>
+<article class="card" id="c-5-04" data-type="cmp">
+<header class="card-head">
+<span class="num">5-04</span><span class="badge cmp">比較</span>
+<h3>ExplorerとBucket-01の違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「ExplorerとBucket-01、どちらもバケット系のハットだけど、違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「Explorerってバケットハットの仲間?」</li><li>「この2つ、形はどう違うの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q9・その他シルエット)</small></h4><ul>
+<li>どちらもバケット系(アウトドア系)のハット</li>
+<li>Explorer:6枚パネル。59FIFTYのクラウン部分をベースに、ハットタイプにアレンジした定番シルエット。「キャップの延長で被れるアウトドアハット。日差し対策にもおすすめ」</li>
+<li>Bucket-01:バケツをひっくり返したようなシルエット。気軽に被れる王道バケットハット。ブリム違いのBucket-02(短い)/Bucket-03(長い)もある</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「どちらもアウトドアで使いやすいハットですが、成り立ちが違います。Explorerは59FIFTYのクラウン部分をベースにしているので、キャップの延長のような感覚で被れて、日差し対策にもおすすめです。Bucket-01はバケツをひっくり返したような形で、つばの長さ違いも選べます。キャップ派の方はExplorerから試してみてください。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「Explorerは、どのキャップをベースにしているんだっけ?」</li>
+<li>深掘り:「つばの長さを選びたいお客様には、どちらを見せる?」(→Bucket-01/02/03)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-01">5-01</a><a class="chip" href="#c-5-03">5-03</a><a class="chip" href="#c-5-06">5-06</a></footer>
+</article>
+<article class="card" id="c-5-05" data-type="cmp">
+<header class="card-head">
+<span class="num">5-05</span><span class="badge cmp">比較</span>
+<h3>CasquetteとBeretの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「キャスケットとベレー、どちらもきれいめに使える帽子だけど、違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「キャスケットってどんな形?」</li><li>「ベレーはサイズ調整できるの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q9・その他シルエット)</small></h4><ul>
+<li>共通:どちらもバケット系</li>
+<li>Casquette:8枚パネル。大きめのクラウンと小さなバイザー。元来のクラシックなシルエットを踏襲。「クラシックで上品な印象。きれいめコーデのハズしにも」</li>
+<li>Beret:丸くて平らな形が特徴。リアのドローコードでサイズの微調整ができる。「きれいめ・個性を出したい方に」</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「キャスケットは8枚パネルで、大きめのクラウンに小さなバイザーがついた、クラシックで上品な印象の帽子です。ベレーは丸くて平らな形で、きれいめにも個性を出したいときにもおすすめです。後ろのドローコードでサイズを微調整できるので、被り心地も合わせやすいですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「キャスケットはパネルが何枚だった?バイザーは大きい?小さい?」</li>
+<li>深掘り:「サイズが少し合わないと言われたら、どちらなら調整できる?」(→Beret。リアのドローコード)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-03">5-03</a><a class="chip" href="#c-5-10">5-10</a></footer>
+</article>
+<div class="set"><span>セットB</span><em>(5-06〜5-10)</em></div>
+<article class="card" id="c-5-06" data-type="app">
+<header class="card-head">
+<span class="num">5-06</span><span class="badge app">応用</span>
+<h3>フェスやキャンプで日差しをよけたい</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「夏フェスやキャンプでずっと外にいるので、日差しをしっかりよけられる帽子が欲しいんです。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「登山用の帽子を探していて…」</li><li>お客様「つばが長めの帽子ってありますか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q9・その他シルエット)</small></h4><ul>
+<li>Adventure:遮光性の高い長めのブリム、メタル素材で補強された通気口など、アウトドアでの着用を考慮した設計。「遮光ブリムと通気口で本格アウトドア仕様。フェスや登山にも」</li>
+<li>キャップに近い感覚で被りたい方には、日差し対策にもおすすめのExplorerも選択肢</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、Adventureがおすすめです。遮光性の高い長めのブリムで日差しをしっかりよけられますし、メタル素材で補強された通気口もついた本格アウトドア仕様なので、フェスやキャンプにぴったりです。キャップに近い感覚で被りたい方には、Explorerもございますので、被り比べてみませんか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「つばが長くて、通気口がついているのはどのモデルだった?」</li>
+<li>深掘り:「アウトドア用の服も見たいと言われたら?」(→Outdoorライン。6-08)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-03">5-03</a><a class="chip" href="#c-5-04">5-04</a><a class="chip" href="#c-6-08">6-08</a></footer>
+</article>
+<article class="card" id="c-5-07" data-type="app">
+<header class="card-head">
+<span class="num">5-07</span><span class="badge app">応用</span>
+<h3>ワーク系の服に合う帽子</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「ワーク系の服が好きで、いつもの野球帽っぽくない帽子を探しているんです。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「ミリタリーっぽい帽子ってありますか?」</li><li>お客様「もっとスポーティで軽い感じの帽子は?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q9・その他シルエット)</small></h4><ul>
+<li>WM-01(キャップ系):ワーク・ミリタリーテイストの定番。やや深めのシルエット。サイズ調整できるWM-01 Adjustableもある。「深めで安定感があり、ワークやミリタリー好きの方に」</li>
+<li>スポーティ・軽快な雰囲気がお好みなら、Jet Cap(5枚パネル、バイザーはフラット・カーブドの両仕様)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、WM-01はいかがでしょう。ワークやミリタリーテイストの定番なので、ワーク系の服と合わせやすいです。やや深めで安定感のある被り心地です。サイズ調整ができるWM-01 Adjustableもあるので、サイズが気になる方でも選びやすいですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ワーク・ミリタリーテイストの定番って、どのモデルだった?」</li>
+<li>深掘り:「"もっと軽くてスポーティな感じがいい"と言われたら?」(→Jet Cap。フラットとカーブドで雰囲気が変わる)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-03">5-03</a></footer>
+</article>
+<article class="card" id="c-5-08" data-type="app">
+<header class="card-head">
+<span class="num">5-08</span><span class="badge app">応用</span>
+<h3>3歳の子へのプレゼント</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「3歳の甥っ子にキャップをプレゼントしたいんですけど、サイズがわからなくて…。」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「子ども用ってありますか?」</li><li>お客様「小学生の娘に合うサイズは?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q14)</small></h4><ul>
+<li>3歳はChild(2〜6歳)</li>
+<li>キッズはMy 1st(0〜2歳)/Child(2〜6歳)/Youth(6〜15歳)の3サイズ</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「3歳のお子さんでしたら、2〜6歳向けのChildサイズがおすすめです。キッズは年齢別にMy 1st、Child、Youthの3サイズがあるので、年齢がわかれば選びやすいんですよ。大きくなったら6〜15歳向けのYouthサイズもございますので、また一緒に選びにいらしてくださいね。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「3つのサイズの名前、小さい順に言ってみよう」</li>
+<li>深掘り:「1歳の弟さんとお揃いにしたいと言われたら?」(→1歳はMy 1st、3歳はChild)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-02">5-02</a><a class="chip" href="#c-10-03">10-03</a></footer>
+</article>
+<article class="card" id="c-5-09" data-type="app">
+<header class="card-head">
+<span class="num">5-09</span><span class="badge app">応用</span>
+<h3>冬のコーデに帽子を足したい</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「寒くなってきたので、ニット帽が欲しいんです。コーデのアクセントにもなるといいな。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「ビーニーってありますか?」</li><li>お客様「冬用の帽子を探していて…」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q9・その他シルエット)</small></h4><ul>
+<li>Knits(ニット系):防寒の定番。ベーシックなビーニー、ミリタリータイプ、ポンポン付きなど、さまざまなバリエーションがある</li>
+<li>接客ワード:「防寒はもちろん、コーデのアクセントにも。形やポンポンで印象が変わります。」</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ニットは防寒はもちろん、コーデのアクセントにもなりますよ。ベーシックなビーニーやミリタリータイプ、ポンポン付きなど種類が豊富で、形やポンポンの有無で印象が変わるので、いくつか被り比べて、お好みの雰囲気を見つけてみてください。いつものコーデに合わせやすい一つが選べますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ニットの種類、3つ挙げられる?」</li>
+<li>深掘り:「シンプルなものがいいと言われたら?」(→ベーシックなビーニー)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-03">5-03</a></footer>
+</article>
+<article class="card" id="c-5-10" data-type="app">
+<header class="card-head">
+<span class="num">5-10</span><span class="badge app">応用</span>
+<h3>人と被らない帽子が欲しい</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「みんなと同じ帽子じゃつまらなくて。ちょっと個性的な帽子ってありますか?」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「人と被らない帽子が欲しいんです」</li><li>お客様「こなれた感じのハットを探していて」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q9・その他シルエット)</small></h4><ul>
+<li>Sailor Brim(バケット系):アメリカ海軍の水兵帽にルーツを持つセーラーハット。ブリムの長さ・傾斜に特徴がある。「他と被らない個性派。ブリムの傾斜でこなれた雰囲気に」</li>
+<li>きれいめに個性を出したい方には、Beret(きれいめ・個性派)やCasquette(クラシックで上品、きれいめコーデのハズしにも)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、Sailor Brimはいかがでしょう。アメリカ海軍の水兵帽がルーツのセーラーハットで、ほかではあまり見かけない個性的な形です。ブリムの長さと傾斜が特徴なので、被るだけでこなれた雰囲気になりますよ。きれいめに個性を出したいなら、ベレーもおすすめです。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「水兵帽がルーツのハット、名前は?」</li>
+<li>深掘り:「"きれいめな服に合わせたい"と言われたら?」(→Beret、Casquette。5-05)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-5-05">5-05</a></footer>
+</article>
+</section><section class="chapter" id="ch6">
+<header class="ch-head"><span class="ch-no">第6章</span><h2>アパレル・ソックス</h2><p class="lead">アパレル4ラインの違いを一言で言えるようにし、「こういう服が欲しい」というお客様の一言から、ラインを選んで提案できるようにする。ソックスは種類とサイズをすらすら言えることがゴール。</p></header>
+<div class="set"><span>セットA</span><em>(6-01〜6-05)</em></div>
+<article class="card" id="c-6-01" data-type="def">
+<header class="card-head">
+<span class="num">6-01</span><span class="badge def">定義</span>
+<h3>アパレルの4ライン</h3></header>
+<div class="q"><span class="label">問い</span><p>「ニューエラのアパレル、4つのラインを一言ずつ紹介して」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「アパレルってどんな種類があるの?」</li><li>「Black Labelって何のライン?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q12・アパレル基礎)</small></h4><ul>
+<li>Black Label:洗練されたカジュアルウェア(直営店限定)</li>
+<li>Performance Apparel:動きやすさと機能性(伸縮性・通気性・速乾性)</li>
+<li>Outdoor:外で過ごす時間を快適に(GORE-TEXやCORDURAなどの素材)</li>
+<li>Golf:ゴルフ場から普段着まで</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「アパレルは4つのラインがございます。直営店限定の洗練されたカジュアルウェアのBlack Label、動きやすく機能的なPerformance Apparel、外で過ごす時間を快適にするOutdoor、ゴルフ場から普段着まで着られるGolfです。どんな場面で着たいか教えていただければ、ぴったりのラインをご案内できますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「キーワードだけでいいよ。大人っぽい/汗をかく/外遊び/ゴルフ、それぞれどのライン?」</li>
+<li>深掘り:「直営店限定なのはどのライン?」(→Black Label)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-6-03">6-03</a><a class="chip" href="#c-6-04">6-04</a><a class="chip" href="#c-6-05">6-05</a></footer>
+</article>
+<article class="card" id="c-6-02" data-type="def">
+<header class="card-head">
+<span class="num">6-02</span><span class="badge def">定義</span>
+<h3>ソックスの種類とサイズ</h3></header>
+<div class="q"><span class="label">問い</span><p>「ソックスの種類とサイズ展開、全部言える?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「靴下って何種類あるの?」</li><li>「サイズはいくつに分かれている?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q10)</small></h4><ul>
+<li>種類:ノーショー、ベリーショート、ショート、アンクル、クルーの5種類</li>
+<li>サイズ:21-23cm、23-25cm、25-27cm、27-29cmの4展開</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ソックスは、ノーショー、ベリーショート、ショート、アンクル、クルーの5種類がございます。サイズは21〜23cm、23〜25cm、25〜27cm、27〜29cmの4つに分かれているので、足のサイズに合わせて選んでいただけます。普段履いている靴のサイズを教えていただければ、すぐにご案内しますね。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「サイズは21cmから2cm刻みで4つ。種類は5つあるよ」</li>
+<li>深掘り:「足が26cmのお客様には、どのサイズ?」(→25-27cm。10-02・表10-Dでも練習)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-10-02">10-02</a></footer>
+</article>
+<article class="card" id="c-6-03" data-type="cmp">
+<header class="card-head">
+<span class="num">6-03</span><span class="badge cmp">比較</span>
+<h3>Black Labelとほかのアパレルの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「Black Labelって、ほかのアパレルと何が違うの?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「Black Labelはどうして高級感があるの?」</li><li>「普通のTシャツとどう違う?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q12・アパレル基礎)</small></h4><ul>
+<li>直営店限定。ニューエラのヘッドウェアにマッチするオーセンティックなカジュアルウェアライン</li>
+<li>シーズンごとにコンセプトがあり、全身のコーディネートができる</li>
+<li>縫製や生地に通常のラインよりこだわっていて高級感があり、他社のアパレルとも合わせやすい</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「Black Labelは直営店限定のラインで、縫製や生地に通常のラインよりこだわっているので、シンプルでも高級感があります。シーズンごとにコンセプトがあって全身のコーディネートができますし、ほかのブランドの服とも合わせやすいので、お手持ちの服にもすぐ取り入れていただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「どこで買えるライン?作りのこだわりはどこ?」</li>
+<li>深掘り:「ほかのブランドの服と合わせたいと言われたら?」(→他社のアパレルとも合わせやすい)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-6-01">6-01</a><a class="chip" href="#c-6-06">6-06</a></footer>
+</article>
+<article class="card" id="c-6-04" data-type="cmp">
+<header class="card-head">
+<span class="num">6-04</span><span class="badge cmp">比較</span>
+<h3>Performance ApparelとOutdoorの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「Performance ApparelとOutdoor、どちらも機能的な服だけど、違いは?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「スポーツ用とアウトドア用、どう分けて説明する?」</li><li>「どっちが雨の日向き?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q12・アパレル基礎)</small></h4><ul>
+<li>Performance Apparel:スポーツシーンに合わせた機能(伸縮性・通気性・速乾性)。ジム・ランニング・移動・夏場など</li>
+<li>Outdoor:GORE-TEXやCORDURAなど、環境に対応する素材・デザイン。キャンプ・フェス・旅行・雨風対策など</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「どちらも機能的ですが、得意な場面が違います。Performance Apparelはスポーツやファッションのシーンで培ったものづくりを生かしたラインで、伸縮性や通気性、速乾性があるので、汗ばむ日でも快適に動けます。OutdoorはGORE-TEXやCORDURAなどの素材で、キャンプや旅行など外で過ごす時間を快適にしてくれます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「汗をかく場面と、外で過ごす場面。それぞれどっち?」</li>
+<li>深掘り:「雨の日の旅行に1着なら?」(→Outdoor。雨風対策)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-6-07">6-07</a><a class="chip" href="#c-6-08">6-08</a></footer>
+</article>
+<article class="card" id="c-6-05" data-type="cmp">
+<header class="card-head">
+<span class="num">6-05</span><span class="badge cmp">比較</span>
+<h3>GolfとPerformance Apparelの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「GolfとPerformance Apparel、どちらも動きやすい服だけど、違いは?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「ゴルフのときはPerformance Apparelでもいい?」</li><li>「Golfラインの特徴は?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q12・アパレル基礎)</small></h4><ul>
+<li>Golf:ゴルフシーンで着用でき、普段使いからゴルフコースまで着られるデザイン。ポロ・モックネック・短パンなど。清潔感と動きやすさを両立</li>
+<li>Performance Apparel:スポーツシーンに合わせた機能(伸縮性・通気性・速乾性)。スポーツと普段着の両方で提案できる</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「Golfはゴルフシーンで着られるラインで、普段使いからコースまで着られるデザインです。ポロやモックネックなど、清潔感と動きやすさを両立しているのが特徴です。Performance Apparelは伸縮性や通気性、速乾性などスポーツ向けの機能が特徴なので、ジムやランニングなど体を動かす場面で快適に過ごせますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「Golfラインで提案しやすいアイテムは何だった?」</li>
+<li>深掘り:「きれいめのスポーツスタイルが好きなお客様には?」(→Golf)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-6-04">6-04</a><a class="chip" href="#c-6-09">6-09</a></footer>
+</article>
+<div class="set"><span>セットB</span><em>(6-06〜6-10)</em></div>
+<article class="card" id="c-6-06" data-type="app">
+<header class="card-head">
+<span class="num">6-06</span><span class="badge app">応用</span>
+<h3>キャップに合う大人っぽい服</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「普段は黒やグレーの服が多いんです。キャップに合う、大人っぽい服ってありますか?」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「シンプルできれいめな服が欲しくて」</li><li>お客様「いつものキャップを大人っぽく見せたいんです」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q12・アパレル基礎)</small></h4><ul>
+<li>Black Label(ヘッドウェアにマッチする、洗練されたカジュアルウェア)</li>
+<li>提案のきっかけ:素材感・シンプルさ・上下セット/同色コーデ</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、Black Labelがおすすめです。シンプルなデザインですが、生地や縫製にこだわっているので、大人っぽく上質な印象になります。ニューエラのヘッドウェアに合うように作られたラインなので、キャップとも合わせやすいですよ。上下セットや同じ色でのコーディネートもできるので、一度合わせてみませんか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「いつものキャップを大人っぽく見せたい方に合うラインは?」</li>
+<li>深掘り:「ギフトで探していると言われたら?」(→Black Labelはギフトにも提案しやすい)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-6-03">6-03</a></footer>
+</article>
+<article class="card" id="c-6-07" data-type="app">
+<header class="card-head">
+<span class="num">6-07</span><span class="badge app">応用</span>
+<h3>汗をかいても快適なTシャツ</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「夏に汗をかいても、快適に着られるTシャツが欲しいんです。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「ジムで着る服を探していて…」</li><li>お客様「動きやすい服ってありますか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q12・アパレル基礎)</small></h4><ul>
+<li>Performance Apparel(動きやすさと機能性)</li>
+<li>提案のきっかけ:速乾・通気・軽さ・伸縮。運動にも移動にも</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、Performance Apparelはいかがでしょう。スポーツやファッションのシーンで培ったものづくりを生かしたラインで、速乾性や通気性があるので、汗ばむ日でも快適に着ていただけます。伸縮性のある素材で動きやすいので、運動のときはもちろん、普段の移動にもおすすめですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「汗ばむ日でも快適に着たい方に合うラインは?機能を3つ挙げると?」</li>
+<li>深掘り:「シルエットはどう選んでもらう?」(→見え方・用途・合わせ方を聞く。6-10)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-6-04">6-04</a><a class="chip" href="#c-6-10">6-10</a></footer>
+</article>
+<article class="card" id="c-6-08" data-type="app">
+<header class="card-head">
+<span class="num">6-08</span><span class="badge app">応用</span>
+<h3>フェスや旅行で使える服</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「今度フェスと旅行に行くので、ちょっと機能的な服を探しているんです。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「キャンプにも着ていける服は?」</li><li>お客様「雨や風が気になる日の服ってありますか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q12・アパレル基礎)</small></h4><ul>
+<li>Outdoor(外で過ごす時間を快適に)</li>
+<li>GORE-TEXやCORDURAなど、環境に対応する素材・デザイン</li>
+<li>提案のきっかけ:外遊び・天候・バッグやキャップとの組み合わせ</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、Outdoorのラインがおすすめです。GORE-TEXやCORDURAなど、いろいろな環境で快適に過ごせる素材やデザインを取り入れているので、フェスや旅行など外で過ごす時間にぴったりです。街でも使いやすいので、旅行先でもそのまま着ていただけますよ。キャップやバッグも一緒に見てみませんか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「外でも街でも使いやすい機能服、どのラインだった?」</li>
+<li>深掘り:「帽子も一緒に選びたいと言われたら?」(→Adventure等のアウトドア系ハット。5-06)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-6-04">6-04</a><a class="chip" href="#c-5-06">5-06</a></footer>
+</article>
+<article class="card" id="c-6-09" data-type="app">
+<header class="card-head">
+<span class="num">6-09</span><span class="badge app">応用</span>
+<h3>ゴルフにも普段にも着られるポロ</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「ゴルフにも行くけど、普段も着られるポロが欲しいんです。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「ゴルフウェアってありますか?」</li><li>お客様「きれいめで動きやすい服を探していて」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q12・アパレル基礎)</small></h4><ul>
+<li>Golf(ゴルフ場から普段着まで)</li>
+<li>提案のきっかけ:コースと普段着の両方・清潔感・動きやすさ。ポロ、モックネック、短パンのセット提案</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、Golfのラインがぴったりです。ゴルフシーンで着られるのはもちろん、普段使いからコースまで着られるデザインなので、一着で両方楽しめます。清潔感と動きやすさを両立しているので、きれいめのスポーツスタイルにもおすすめですよ。ポロとモックネック、両方合わせてみませんか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ゴルフ場以外でもきれいに着られるラインは?」</li>
+<li>深掘り:「下に合わせるものも聞かれたら?」(→短パンとのセット提案)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-6-05">6-05</a></footer>
+</article>
+<article class="card" id="c-6-10" data-type="app">
+<header class="card-head">
+<span class="num">6-10</span><span class="badge app">応用</span>
+<h3>Tシャツ選びに迷っている</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「Tシャツが欲しいんですけど、種類が多くてどれがいいかわからなくて…。」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「オーバーサイズとレギュラー、どっちがいいですか?」</li><li>お客様「おすすめのTシャツは?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:アパレル基礎 Tシャツ接客)</small></h4><ul>
+<li>3つの確認ポイント:①見え方(すっきり見せたいか、ゆるく着たいか → REGULAR / WASHED RELAX FIT / OVERSIZED)②用途(普段着中心か、運動・旅行・ゴルフか → Performance / Outdoor / Golf)③合わせ方(下は細め・太めのどちらが多いか → 上下バランスとセット提案)</li>
+<li>流れは「聞く → 比べる → 着てもらう」</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「迷いますよね、一緒にお選びしますね。まず、すっきり見せたいか、ゆるく着たいか、お好みはありますか?それによってレギュラーやオーバーサイズなど、シルエットを選べます。普段着中心か、運動や旅行でも着るかを教えていただければ、ぴったりの一枚をご提案できますよ。実際に着比べていただくと、イメージどおりの1枚が見つけやすいです。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「確認ポイントは3つ。見え方・用途、あと1つは?」(→合わせ方)</li>
+<li>深掘り:「生地の違いを聞かれたら?」(→ソラーロ:綿とポリエステルで快適さと耐久性を両立/ジャガード:柔らかさとツヤ感/ワッフル:軽さと立体感/パイル:ふんわり柔らかく、さらっとした感触)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-6-07">6-07</a></footer>
+</article>
+</section><section class="chapter" id="ch7">
+<header class="ch-head"><span class="ch-no">第7章</span><h2>アクセサリー・ケア</h2><p class="lead">5つのアクセサリーの役割を自分の言葉で言えるようにし、お客様の「困った」「気になる」から、ぴったりのアイテムを提案できるようにする。キャップと一緒に提案して、お気に入りを気持ちよく使い続けていただくことがゴール。</p></header>
+<div class="set"><span>セットA</span><em>(7-01〜7-05)</em></div>
+<article class="card" id="c-7-01" data-type="def">
+<header class="card-head">
+<span class="num">7-01</span><span class="badge def">定義</span>
+<h3>キャップケアスプレー</h3></header>
+<div class="q"><span class="label">問い</span><p>「キャップケアスプレーって、何ができるもの?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「このスプレーは何に使うの?」</li><li>「どうやって使うの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13・キャップケアスプレーの店舗内での使用について)</small></h4><ul>
+<li>消臭・抗菌スプレー</li>
+<li>キャップにむらなく振りかけることで、消臭・抗菌効果が得られる</li>
+<li>店頭では、使い方や効果を説明して商品を知っていただく</li>
+<li>Bポジションのスタッフ:常に携帯し、お客様に紹介できるようにする(お声がけのきっかけにも、接客中の紹介にも使える)</li>
+<li>R1・R2・R3のスタッフ:レジでお客様がご購入するヘッドウェアや、お客様が着用しているヘッドウェアにも使用できる</li>
+<li>NG:試着直後にお客様の目の前でケアスプレーを使ってメンテナンスすること</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「こちらはキャップケアスプレーで、消臭・抗菌のためのスプレーです。キャップにむらなく振りかけていただくだけで、消臭・抗菌効果が得られます。お気に入りのキャップを気持ちよく被り続けていただけるので、お手入れにおすすめですよ。よろしければ、使い方をご紹介しますね。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「効果は2つ。何と何だった?使い方は?」</li>
+<li>深掘り:「試着した直後のお客様の目の前で、スプレーでお手入れをするのはどう?」(→店舗内使用ルールでNG。紹介は携帯しているスプレーで行う)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-7-04">7-04</a><a class="chip" href="#c-7-05">7-05</a><a class="chip" href="#c-7-06">7-06</a></footer>
+</article>
+<article class="card" id="c-7-02" data-type="def">
+<header class="card-head">
+<span class="num">7-02</span><span class="badge def">定義</span>
+<h3>キャップクリップ</h3></header>
+<div class="q"><span class="label">問い</span><p>「キャップクリップって、何に使うもの?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「このクリップはどこにつけるの?」</li><li>「キャップクリップの便利なところは?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13)</small></h4><ul>
+<li>キャップ内側のラベル部分に装着し、カバンやベルトループなどに取り付けられる</li>
+<li>ニューエラのバックパックやバッグには、キャップクリップ用のループが装備されている</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「こちらはキャップクリップです。キャップ内側のラベル部分につけて、カバンやベルトループに取り付けられます。被らないときもキャップを手に持たずに済むので便利ですよ。ニューエラのバックパックやバッグにはキャップクリップ用のループもついているので、合わせて使っていただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「キャップのどこにつけて、どこに取り付けるんだっけ?」</li>
+<li>深掘り:「ニューエラのバッグと一緒に使うと、何がいい?」(→キャップクリップ用のループが装備されている)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-7-08">7-08</a></footer>
+</article>
+<article class="card" id="c-7-03" data-type="def">
+<header class="card-head">
+<span class="num">7-03</span><span class="badge def">定義</span>
+<h3>サイズアジャスティングテープ</h3></header>
+<div class="q"><span class="label">問い</span><p>「サイズアジャスティングテープって、どんなときに使うもの?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「このテープは何のためのもの?」</li><li>「キャップがゆるいときに使えるものある?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13)</small></h4><ul>
+<li>髪を切った後などに感じる、ヘッドウェアの被り心地の違和感を、最適なサイズ感に調整できるテープ</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「こちらはサイズアジャスティングテープです。髪を切った後などに、いつものキャップの被り心地がしっくりこないと感じることってありますよね。そんなときにこのテープを使うと、ちょうどいいサイズ感に調整できます。お気に入りのキャップを買い替えずに使い続けていただけるのがうれしいポイントです。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「どんなタイミングで被り心地が変わることが多い?」(→髪を切った後など)</li>
+<li>深掘り:「サイズ調整のない59FIFTYをお持ちの方には、なぜ特に役立つ?」(→トゥルーフィッテドでサイズ調整がないため。3-01)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-3-01">3-01</a><a class="chip" href="#c-4-10">4-10</a><a class="chip" href="#c-7-09">7-09</a></footer>
+</article>
+<article class="card" id="c-7-04" data-type="cmp">
+<header class="card-head">
+<span class="num">7-04</span><span class="badge cmp">比較</span>
+<h3>ライナーとケアスプレーの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「キャップ&amp;ハットライナーとキャップケアスプレー、どちらも消臭・抗菌だけど、違いは?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「ライナーってどこにつけるの?」</li><li>「スプレーがあればライナーはいらない?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13)</small></h4><ul>
+<li>キャップ&amp;ハットライナー:キャップの内側のスウェットバンド部分に貼り付けて、抗菌・消臭効果を実現する</li>
+<li>キャップケアスプレー:キャップにむらなく振りかけて、消臭・抗菌効果を得る</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「どちらもキャップを清潔に保つためのアイテムですが、使い方が違います。ライナーはキャップ内側のスウェットバンド部分に貼り付けて、抗菌・消臭効果を得るものです。ケアスプレーはキャップにむらなく振りかけて使います。組み合わせていただくと、内側のスウェットバンド部分もキャップ全体もケアできますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ライナーは"貼る"、スプレーは?」</li>
+<li>深掘り:「ライナーはキャップのどの部分に貼る?」(→内側のスウェットバンド部分)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-7-01">7-01</a><a class="chip" href="#c-7-06">7-06</a></footer>
+</article>
+<article class="card" id="c-7-05" data-type="cmp">
+<header class="card-head">
+<span class="num">7-05</span><span class="badge cmp">比較</span>
+<h3>キャップブラシとケアスプレーの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「キャップブラシとキャップケアスプレー、どちらもお手入れ用だけど、何が違う?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「ブラシとスプレー、どっちを使えばいいの?」</li><li>「ブラシはどんなときに使う?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13)</small></h4><ul>
+<li>キャップブラシ:高級感のあるウッド製の持ち手。キャップについたほこりや汚れを落とすときに使う</li>
+<li>キャップケアスプレー:消臭・抗菌スプレー</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ブラシとスプレーは、お手入れの目的が違います。キャップブラシはウッド製の持ち手の高級感のあるブラシで、キャップについたほこりや汚れを落とすときに使います。ケアスプレーは消臭・抗菌のためのスプレーです。見た目のお手入れはブラシ、清潔さはスプレーと使い分けていただくと、キャップを気持ちよく使えますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ほこりや汚れを落とすのはどっち?」</li>
+<li>深掘り:「ブラシの見た目の特徴は?」(→高級感のあるウッド製の持ち手)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-7-01">7-01</a><a class="chip" href="#c-7-07">7-07</a></footer>
+</article>
+<div class="set"><span>セットB</span><em>(7-06〜7-10)</em></div>
+<article class="card" id="c-7-06" data-type="app">
+<header class="card-head">
+<span class="num">7-06</span><span class="badge app">応用</span>
+<h3>キャップの汗のにおいが気になる</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「夏になると、キャップの汗のにおいが気になっちゃって…。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「キャップって洗えないから、においが心配で」</li><li>お客様「毎日被るので清潔に保ちたいんです」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13・キャップケアスプレーの店舗内での使用について)</small></h4><ul>
+<li>キャップケアスプレー:むらなく振りかけて消臭・抗菌効果</li>
+<li>キャップ&amp;ハットライナー:内側のスウェットバンド部分に貼り付けて抗菌・消臭効果</li>
+<li>Bポジションのスタッフは、携帯しているスプレーで紹介する。お客様が着用しているヘッドウェアに使用できるのはR1・R2・R3のスタッフ</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「汗の季節は気になりますよね。それでしたら、キャップケアスプレーがおすすめです。キャップにむらなく振りかけるだけで、消臭・抗菌効果が得られます。さらに、内側のスウェットバンド部分に貼るキャップ&amp;ハットライナーもあるので、内側も一緒にケアできますよ。よろしければ、使い方をご紹介しますね。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「消臭・抗菌できるアイテム、2つあったよね?」</li>
+<li>深掘り:「"キャップって洗えるの?"と聞かれたら、どうつなげる?」(→洗い方は答えず、スプレー・ライナーでのお手入れを紹介する)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-7-01">7-01</a><a class="chip" href="#c-7-04">7-04</a></footer>
+</article>
+<article class="card" id="c-7-07" data-type="app">
+<header class="card-head">
+<span class="num">7-07</span><span class="badge app">応用</span>
+<h3>キャップのほこりが目立ってきた</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「このキャップ、ほこりが目立ってきちゃって。どうお手入れしたらいいですか?」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「黒いキャップだとほこりが気になって」</li><li>お客様「キャップのお手入れって何をすればいい?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13)</small></h4><ul>
+<li>キャップブラシ:キャップについたほこりや汚れを落とすときに使う。高級感のあるウッド製の持ち手</li>
+<li>においや清潔さも気になる方には、キャップケアスプレーもあわせて提案できる</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、キャップブラシがおすすめです。キャップについたほこりや汚れを落とすときに使うブラシで、持ち手がウッド製なので高級感もあります。ブラッシングしていただくと、お気に入りのキャップをきれいな状態で被っていただけますよ。あわせて、消臭・抗菌のケアスプレーもいかがですか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ほこりや汚れを落とすアクセサリーは?」</li>
+<li>深掘り:「においも気になると言われたら?」(→ケアスプレー・ライナー。7-06)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-7-05">7-05</a><a class="chip" href="#c-7-06">7-06</a></footer>
+</article>
+<article class="card" id="c-7-08" data-type="app">
+<header class="card-head">
+<span class="num">7-08</span><span class="badge app">応用</span>
+<h3>脱いだキャップの置き場所に困る</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「旅行中、帽子を脱いだときに置き場所に困るんですよね。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「キャップを持ち歩くとき、手がふさがっちゃって」</li><li>お客様「電車の中でキャップをどうしたらいいか…」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13)</small></h4><ul>
+<li>キャップクリップ:キャップ内側のラベル部分に装着し、カバンやベルトループなどに取り付けられる</li>
+<li>ニューエラのバックパックやバッグには、キャップクリップ用のループが装備されている</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、キャップクリップが便利です。キャップ内側のラベル部分につけて、カバンやベルトループに取り付けられるので、脱いだ後も手に持たずに済みます。ニューエラのバックパックやバッグにはキャップクリップ用のループがついているので、一緒にお使いいただくとさらに便利ですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「キャップをカバンやベルトにつけられるアイテムは?」</li>
+<li>深掘り:「旅行用のバッグも探していると言われたら?」(→バックパック。キャップクリップ用ループ付き。8-10)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-7-02">7-02</a><a class="chip" href="#c-8-10">8-10</a></footer>
+</article>
+<article class="card" id="c-7-09" data-type="app">
+<header class="card-head">
+<span class="num">7-09</span><span class="badge app">応用</span>
+<h3>髪を切ったら手持ちのキャップがゆるくなった</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「髪をバッサリ切ったら、持っているキャップが全部ゆるくなっちゃって。全部買い直しかな…。」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「最近キャップの被り心地がしっくりこなくて」</li><li>お客様「ちょっとだけゆるいんです」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13・Q7)</small></h4><ul>
+<li>サイズアジャスティングテープ:髪を切った後などの被り心地の違和感を、最適なサイズ感に調整できる</li>
+<li>買い直さずに、お持ちのキャップを使い続けられる</li>
+<li>次にキャップを選ぶなら、サイズ調整ができるアジャスタブルのモデルも選択肢</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「髪を切った後にゆるく感じること、よくありますよね。それでしたら、サイズアジャスティングテープがおすすめです。髪を切った後などの被り心地の違和感を、ちょうどいいサイズ感に調整できるテープなので、お持ちのキャップを買い直さずに、そのまま使っていただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「髪を切った後の被り心地を調整できるアクセサリーは?」</li>
+<li>深掘り:「髪型がよく変わる方が次のキャップを選ぶなら?」(→アジャスタブルのモデル。4-10)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-7-03">7-03</a><a class="chip" href="#c-4-10">4-10</a></footer>
+</article>
+<article class="card" id="c-7-10" data-type="app">
+<header class="card-head">
+<span class="num">7-10</span><span class="badge app">応用</span>
+<h3>新しいキャップを大切に使いたい</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「新しいキャップを買ったので、きれいに長く使いたいんです。何かいいものありますか?」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「キャップのお手入れグッズってありますか?」</li><li>お客様「プレゼントのキャップと一緒に何か添えたいんです」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q13)</small></h4><ul>
+<li>キャップブラシ:ほこりや汚れを落とす</li>
+<li>キャップケアスプレー:消臭・抗菌</li>
+<li>キャップ&amp;ハットライナー:内側のスウェットバンド部分に貼って抗菌・消臭</li>
+<li>お客様の気になること(見た目/におい・清潔さ)を聞いて選ぶ</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「大切に使っていただけるとうれしいです。それでしたら、ほこりや汚れを落とすキャップブラシと、消臭・抗菌のキャップケアスプレーがおすすめです。内側のスウェットバンド部分に貼るライナーもあるので、見た目も内側もケアできますよ。気になることを教えていただければ、ぴったりのものをご案内しますね。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「お手入れのアクセサリー、3つ挙げられる?」</li>
+<li>深掘り:「1つだけ選ぶなら、どう聞いて決める?」(→見た目のほこり・汚れならブラシ、においや清潔さならスプレー)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-7-04">7-04</a><a class="chip" href="#c-7-05">7-05</a></footer>
+</article>
+</section><section class="chapter" id="ch8">
+<header class="ch-head"><span class="ch-no">第8章</span><h2>バックパック</h2><p class="lead">10種類の名前と特徴を覚えるだけでなく、お客様の「使う場面」を聞いて、合うモデルを選んで提案できるようにする。容量は資料に記載のある3モデル(ライトパック約27L・キャンパスパック例:35L・スポーツパック約31L)だけを伝える。</p></header>
+<div class="set"><span>セットA</span><em>(8-01〜8-05)</em></div>
+<article class="card" id="c-8-01" data-type="def">
+<header class="card-head">
+<span class="num">8-01</span><span class="badge def">定義</span>
+<h3>ライトパックはどんなモデル?</h3></header>
+<div class="q"><span class="label">問い</span><p>「ライトパックって、どんなバックパック?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「軽いリュックってある?」</li><li>「容量どれくらい?取り回しはいい?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17)</small></h4><ul>
+<li>軽量設計で、取り回しが良いモデル</li>
+<li>容量は約27L</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「こちらのライトパックは、名前のとおり軽量設計のモデルです。容量は約27Lで、軽いので背負ったり下ろしたりの取り回しがとても楽です。毎日持ち歩くリュックを、なるべく軽くしたい方におすすめです。ぜひ一度背負ってみてください。軽さを実感していただけると思います。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「名前の"ライト"って、どういう意味だと思う?」と聞く</li>
+<li>深掘り:「容量の数字がわかっているモデル、ライトパックのほかに2つ言える?」(→スポーツパック約31L、キャンパスパック例:35L)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-03">8-03</a><a class="chip" href="#c-8-09">8-09</a></footer>
+</article>
+<article class="card" id="c-8-02" data-type="def">
+<header class="card-head">
+<span class="num">8-02</span><span class="badge def">定義</span>
+<h3>ラックサックの特徴</h3></header>
+<div class="q"><span class="label">問い</span><p>「ラックサックの特徴を、3つ言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「アウトドアっぽいリュックはどれ?」</li><li>「ラックサックって大きさは選べるの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17)</small></h4><ul>
+<li>クラシックでアウトドアなデザインのリュックサック形状。定番的デザインのモデル</li>
+<li>容量バリエーションがある</li>
+<li>帽子を運ぶための仕組みがある</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ラックサックは、クラシックでアウトドアな雰囲気のリュックサック型で、ニューエラの定番デザインです。容量のバリエーションがあるので、荷物の量に合わせて選んでいただけます。さらに帽子を運ぶための仕組みがついているので、キャップを持ち歩きたい方にも便利です。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:実物を手に取ってもらい「キャップに関係する工夫、どこにある?」と聞く</li>
+<li>深掘り:「キャップ好きのお客様に、ラックサックをひと言で勧めるなら?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-10">8-10</a><a class="chip" href="#c-7-02">7-02</a></footer>
+</article>
+<article class="card" id="c-8-03" data-type="def">
+<header class="card-head">
+<span class="num">8-03</span><span class="badge def">定義</span>
+<h3>収納が多い・大容量のモデル</h3></header>
+<div class="q"><span class="label">問い</span><p>「"とにかくたくさん入るのがいい"と言われたら、候補になるモデルを3つ以上挙げると?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「大容量タイプはどれ?」</li><li>「収納が多いのはどのモデル?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17)</small></h4><ul>
+<li>ボックスパック:スクエアシルエットで収納効率が高く、メイン収納が大きい。靴なども収まる</li>
+<li>キャンパスパック:通学用途に特化した大容量モデル(例:35L)</li>
+<li>キャリアパック:収納豊富で小物を整理しやすい大容量型</li>
+<li>クラブパック:収納豊富で、あらゆるスポーツシーンで使用可能</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「たくさん入るものでしたら、いくつか候補があります。ボックスパックは四角い形でメイン収納が大きく、靴なども入ります。キャリアパックは大容量で収納が多く、小物を整理しやすいのが特長です。通学用なら大容量のキャンパスパックもあります。何を一番多く入れるかを教えていただければ、ぴったりのものをお選びしますね。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"大容量"って説明に書いてあったモデル、2つ思い出せる?」</li>
+<li>深掘り:「"靴も入れたい"と言われたら、どれを先に見せる?」(→ボックスパック。運動用ならスポーツパックも)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-04">8-04</a><a class="chip" href="#c-8-06">8-06</a><a class="chip" href="#c-8-07">8-07</a></footer>
+</article>
+<article class="card" id="c-8-04" data-type="cmp">
+<header class="card-head">
+<span class="num">8-04</span><span class="badge cmp">比較</span>
+<h3>ボックスパックとコードパックの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「ボックスパックとコードパック、どちらもスクエア型。違いを一言で言うと?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「四角いリュック、2つあるけど何が違うの?」</li><li>「すっきりしたのと、たくさん入るの、どっち?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17)</small></h4><ul>
+<li>共通点:どちらもスクエア型</li>
+<li>ボックスパック:収納効率が高く、メイン収納が大きい定番タイプ。靴なども収まる</li>
+<li>コードパック:ミニマルかつ機能性を備えたスクエア型</li>
+<li>選び分け:荷物の量を重視→ボックスパック/シンプルな見た目を重視→コードパック</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「どちらも四角い形ですが、ボックスパックはメイン収納が大きく、靴なども入るので荷物が多い日でも安心です。コードパックはミニマルなデザインに機能性を備えたモデルなので、すっきりした見た目で持ちたい方に合います。荷物の量と見た目、どちらを優先されますか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:2つを並べて「見た目の印象の違いを言ってみて」</li>
+<li>深掘り:「"通勤で使う。荷物は少なめ"と言われたらどっち?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-03">8-03</a><a class="chip" href="#c-8-09">8-09</a></footer>
+</article>
+<article class="card" id="c-8-05" data-type="cmp">
+<header class="card-head">
+<span class="num">8-05</span><span class="badge cmp">比較</span>
+<h3>スポーツパックとクラブパックの違い</h3></header>
+<div class="q"><span class="label">問い</span><p>「スポーツパックとクラブパック、どちらもスポーツ向き。違いは?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「部活用ならどっち?」</li><li>「スポーツ用のリュック、2つの差は?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17)</small></h4><ul>
+<li>スポーツパック:スポーツギアが入りやすい容量(約31L)。運動時の着替え・シューズも入れやすい設計</li>
+<li>クラブパック:収納豊富で、あらゆるスポーツシーンで使用可能</li>
+<li>選び分け:着替え・シューズを持ち運ぶ→スポーツパック/いろいろなスポーツで幅広く使いたい→クラブパック</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「スポーツパックは約31Lで、スポーツギアが入りやすく、着替えやシューズも入れやすい設計です。クラブパックは収納が豊富で、いろいろなスポーツシーンで使えます。着替えやシューズを持ち歩くならスポーツパック、いろいろなスポーツで使い回したいならクラブパックがおすすめです。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「容量の数字がわかっているのはどっち?」から入る</li>
+<li>深掘り:「"ジムの帰りにそのまま買い物も"という方には、どう伝える?」</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-07">8-07</a></footer>
+</article>
+<div class="set"><span>セットB</span><em>(8-06〜8-10)</em></div>
+<article class="card" id="c-8-06" data-type="app">
+<header class="card-head">
+<span class="num">8-06</span><span class="badge app">応用</span>
+<h3>通学用のバックパック</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「高校生の子どもの通学用を探していて。教科書もPCも入れたいんです。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「大学に持っていくリュックが欲しい」</li><li>お客様「学校用で、中を分けられるのがいい」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17)</small></h4><ul>
+<li>キャンパスパック:通学用途に特化した大容量モデル(例:35L)</li>
+<li>教科書・PC・着替えなどを分けて収納できる</li>
+<li>部活の着替え・シューズも多いなら、スポーツパックも比較の候補</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「通学用でしたら、キャンパスパックがおすすめです。通学のために作られた大容量モデルで、教科書やPC、着替えなどを分けて収納できるので、中でごちゃごちゃしにくく、必要なものをさっと取り出せます。部活の荷物も一緒に入れるかどうか、お子さんの使い方を伺ってもよろしいですか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"通学"に特化したモデルの名前、学校っぽい名前だったよね?」</li>
+<li>深掘り:「部活でシューズも持っていくと言われたら、どう続ける?」(→スポーツパックも並べて見比べ)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-03">8-03</a><a class="chip" href="#c-8-05">8-05</a></footer>
+</article>
+<article class="card" id="c-8-07" data-type="app">
+<header class="card-head">
+<span class="num">8-07</span><span class="badge app">応用</span>
+<h3>ジム・運動に使うバックパック</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「仕事帰りにジムに寄るので、着替えとシューズが入るリュックが欲しいです。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「サッカーの練習に持っていくリュックある?」</li><li>お客様「靴も入るスポーツ用ってどれ?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17)</small></h4><ul>
+<li>スポーツパック:スポーツギアが入りやすい容量(約31L)。運動時の着替え・シューズも入れやすい設計</li>
+<li>いろいろなスポーツで使い回したいなら、収納豊富なクラブパックも候補</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、スポーツパックはいかがでしょう。約31Lでスポーツギアが入りやすく、着替えやシューズも入れやすい設計なので、仕事帰りのジムにもそのまま持っていけます。いろいろなスポーツで使い回したい方には、収納豊富なクラブパックもあります。中を見てみてください。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"運動"と"シューズ"、説明にあったモデルはどれ?」</li>
+<li>深掘り:「"なるべく軽いのがいい"と付け足されたら?」(→ライトパックも並べ、荷物量で選んでもらう)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-05">8-05</a><a class="chip" href="#c-8-01">8-01</a></footer>
+</article>
+<article class="card" id="c-8-08" data-type="app">
+<header class="card-head">
+<span class="num">8-08</span><span class="badge app">応用</span>
+<h3>仕事の書類を持ち歩くバックパック</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「仕事でB4の資料を持ち歩くことが多くて。中を分けて入れられるリュックってありますか?」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「書類が折れないリュックが欲しい」</li><li>お客様「仕切りがあるタイプはある?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17)</small></h4><ul>
+<li>スマートパック:B4サイズ対応</li>
+<li>2層式で仕分けしやすい収納構造</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「スマートパックがおすすめです。B4サイズに対応しているので、資料を折らずにそのまま入れていただけます。さらに2層式になっていて、資料とほかの荷物を分けて入れられるので、必要なものがすぐに取り出せます。お仕事の移動もすっきりしますよ。中の作りをご覧になりますか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「紙のサイズが書いてあったモデル、どれだっけ?」</li>
+<li>深掘り:「"見た目もすっきりしたい"と言われたら、ほかに何を見せる?」(→コードパック、アーバンパック)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-04">8-04</a><a class="chip" href="#c-8-09">8-09</a></footer>
+</article>
+<article class="card" id="c-8-09" data-type="app">
+<header class="card-head">
+<span class="num">8-09</span><span class="badge app">応用</span>
+<h3>街で使いやすいバックパック</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「普段の街歩き用に、すっきり見えるリュックが欲しいんですけど。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「おしゃれに使えるリュックある?」</li><li>お客様「アウトドアっぽくないのがいい」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17)</small></h4><ul>
+<li>アーバンパック:街中スタイルに最適化された都会派デザイン</li>
+<li>コードパック:ミニマルかつ機能性を備えたスクエア型</li>
+<li>軽さも重視なら、軽量設計で取り回しが良いライトパック(約27L)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「街で使うのでしたら、アーバンパックはいかがでしょう。街中スタイルに合わせた都会派のデザインなので、普段の服装になじみやすいです。もう少しシンプルな四角い形がお好みなら、ミニマルで機能性もあるコードパックもあります。並べて背負い比べてみませんか?」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"都会派"って説明があったのはどれ?」</li>
+<li>深掘り:「"軽いのが一番大事"と言われたら?」(→ライトパック)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-01">8-01</a><a class="chip" href="#c-8-04">8-04</a></footer>
+</article>
+<article class="card" id="c-8-10" data-type="app">
+<header class="card-head">
+<span class="num">8-10</span><span class="badge app">応用</span>
+<h3>キャップも一緒に持ち歩きたい</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「キャップをよく持ち歩くんですけど、キャップも一緒に持ち歩けるリュックってありますか?」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「旅行にキャップを持っていきたい」</li><li>お客様「帽子をかばんにつけられる?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q17・Q13)</small></h4><ul>
+<li>ラックサック:帽子を運ぶための仕組みがある。クラシックでアウトドアなデザイン、容量バリエーションあり</li>
+<li>ニューエラのバックパックやバッグには、キャップクリップ用のループが装備されている</li>
+<li>キャップクリップ:キャップ内側のラベル部分に装着し、カバンやベルトループなどに取り付け可能</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ラックサックには帽子を運ぶための仕組みがあるので、キャップを持ち歩く方にぴったりです。また、ニューエラのバックパックにはキャップクリップ用のループがついていて、キャップクリップを使えばキャップをバッグに取り付けて持ち運べます。お手持ちのキャップと合わせてお試しください。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「キャップをかばんにつけるアクセサリー、何だった?」</li>
+<li>深掘り:「キャップクリップは、キャップのどこにつける?」(→内側のラベル部分)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-8-02">8-02</a><a class="chip" href="#c-7-02">7-02</a><a class="chip" href="#c-7-08">7-08</a></footer>
+</article>
+</section><section class="chapter" id="ch9">
+<header class="ch-head"><span class="ch-no">第9章</span><h2>NEW ERA REWARD</h2><p class="lead">会員プログラムの内容を「説明」で終わらせず、お会計やお声がけの場面で、お客様のメリットを30秒で伝えて入会につなげられるようにする。</p></header>
+<div class="set"><span>セットA</span><em>(9-01〜9-05)</em></div>
+<article class="card" id="c-9-01" data-type="def">
+<header class="card-head">
+<span class="num">9-01</span><span class="badge def">定義</span>
+<h3>NEW ERA REWARDとは</h3></header>
+<div class="q"><span class="label">問い</span><p>「NEW ERA REWARDって、ひと言でいうとどんなプログラム?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「リワードって何?ポイントカードみたいなもの?」</li><li>「どこで買い物するとポイントがつくの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q11)</small></h4><ul>
+<li>ニューエラオンラインストアと直営店での購入に対し、ポイントを獲得できる会員向けプログラム</li>
+<li>購入金額に応じてポイントが貯まる</li>
+<li>会員登録は無料。ポイントの有効期限はポイント取得日から1年間</li>
+<li>会員限定の特典やキャンペーンも提供される</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「NEW ERA REWARDは、ニューエラのオンラインストアと直営店でのお買い物でポイントが貯まる会員プログラムです。会員登録は無料で、お買い物の金額に応じてポイントが貯まります。会員限定の特典やキャンペーンもあるので、ニューエラでのお買い物をもっと楽しんでいただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ポイントが貯まるのは、どことどこでのお買い物?」</li>
+<li>深掘り:「ポイントの有効期限を聞かれたら、どう答える?」(→取得日から1年間)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-9-02">9-02</a><a class="chip" href="#c-9-04">9-04</a></footer>
+</article>
+<article class="card" id="c-9-02" data-type="def">
+<header class="card-head">
+<span class="num">9-02</span><span class="badge def">定義</span>
+<h3>会員特典を3つ以上</h3></header>
+<div class="q"><span class="label">問い</span><p>「REWARDの会員になると何ができる?3つ以上言ってみて。」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「会員だけの特典って何がある?」</li><li>「ポイント以外にいいことある?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q11)</small></h4><ul>
+<li>人気商品発売時の先行アクセス/会員限定商品の販売</li>
+<li>マイサイズの登録/購入履歴の確認/ニュースレターの購読</li>
+<li>ヒートシーラー(ワッペン圧着サービス)/店舗限定ワッペンの購入と圧着</li>
+<li>ブラック会員限定アイテムプレゼント/オンラインストアの送料無料ライン</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「ポイント以外にも特典があります。人気商品の発売時に先行でアクセスできたり、会員限定の商品を購入できたりします。また、マイサイズを登録できるので、次にキャップを選ぶときにサイズで迷いにくくなりますし、購入履歴も確認できます。お好きなモデルを見逃したくない方にとても便利です。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"買う前""買うとき""買った後"に分けて思い出してみて」</li>
+<li>深掘り:「キャップのサイズで毎回迷うお客様に、一番響きそうな特典はどれ?」(→マイサイズの登録)</li>
+<li>※条件は時期で変わるため最新情報を確認</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-9-04">9-04</a><a class="chip" href="#c-9-05">9-05</a><a class="chip" href="#c-9-06">9-06</a></footer>
+</article>
+<article class="card" id="c-9-03" data-type="cmp">
+<header class="card-head">
+<span class="num">9-03</span><span class="badge cmp">比較</span>
+<h3>ポイントの有効期限と会員ランクの決まり方</h3></header>
+<div class="q"><span class="label">問い</span><p>「ポイントの有効期限と会員ランクの決まり方、どちらも"1年"がつくけど、何が違う?」</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>「ポイントって、いつまで使えるの?ランクとは関係ある?」</li><li>「ランクってずっと同じなの?」</li><li>「シルバーとかゴールドって、どうやって決まるの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q11)</small></h4><ul>
+<li>ポイントの有効期限:ポイント取得日から1年間</li>
+<li>会員ランク:シルバー/ゴールド/ブラックの3つ。過去一年間での保有ポイントによって変動する</li>
+<li>ちがい:有効期限は「1つ1つのポイントがいつまで使えるか」、ランクは「過去1年間に持っているポイントでどのランクになるか」</li>
+<li>ブラック会員には限定アイテムプレゼントの特典がある</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「どちらも"1年"ですが、意味が違うんです。ポイントは、貯まった日から1年間お使いいただけます。会員ランクはシルバー、ゴールド、ブラックの3つで、過去1年間のポイントでランクが決まります。ブラック会員の方には限定アイテムのプレゼントもあるので、ポイントを上手に使いながら特典も楽しんでいただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「有効期限は"いつから"1年?ランクは"いつまでの"1年?」</li>
+<li>深掘り:「"ランクを上げると何かある?"と聞かれたら?」(→ブラック会員限定アイテムプレゼント)</li>
+<li>※条件は時期で変わるため最新情報を確認</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-9-01">9-01</a><a class="chip" href="#c-9-02">9-02</a></footer>
+</article>
+<article class="card" id="c-9-04" data-type="app">
+<header class="card-head">
+<span class="num">9-04</span><span class="badge app">応用</span>
+<h3>お会計時の入会のお声がけ</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様(お会計時に)「ポイントカードとかって、ありますか?」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「会員とかって入ったほうがいいんですか?」</li><li>お客様「ポイントってつきます?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q11)</small></h4><ul>
+<li>入会は無料、購入金額に応じてポイントが貯まる</li>
+<li>オンラインストアと直営店の両方で貯まる</li>
+<li>有効期限はポイント取得日から1年間</li>
+<li>お客様に合う特典を1つ添える(例:マイサイズの登録、先行アクセス)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「はい、NEW ERA REWARDという会員プログラムがあります。登録は無料で、直営店でもオンラインストアでもお買い物の金額に応じてポイントが貯まります。よろしければこの機会にいかがでしょうか。マイサイズも登録できるので、次回のサイズ選びも楽になります。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"無料"と"どこで貯まるか"の2つだけまず言ってみて」</li>
+<li>深掘り:「"登録って面倒じゃない?"と言われたら、どう返す?」(→無料であることとメリットを1つ。登録手順は店舗の案内方法に沿って)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-9-01">9-01</a><a class="chip" href="#c-9-05">9-05</a></footer>
+</article>
+<article class="card" id="c-9-05" data-type="app">
+<header class="card-head">
+<span class="num">9-05</span><span class="badge app">応用</span>
+<h3>発売日を気にするお客様</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「欲しかったモデル、気づいたらいつも売り切れちゃってるんですよね…。」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「新作っていつ出るかわかります?」</li><li>お客様「人気のモデル、買い逃したくないんです」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q11)</small></h4><ul>
+<li>人気商品発売時の先行アクセス</li>
+<li>会員限定商品の販売</li>
+<li>ニュースレターの購読で情報を受け取れる</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「それでしたら、NEW ERA REWARDへのご登録がおすすめです。会員の方は人気商品の発売時に先行アクセスができるので、買い逃しを防ぎやすくなります。会員限定の商品やニュースレターでのお知らせもあるので、新作の情報を早めにキャッチしていただけます。登録は無料です。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「"買い逃したくない"お客様に効く特典、名前に"先"がつくもの」</li>
+<li>深掘り:「同じお客様に、ほかにもう1つ特典を添えるなら?」(→会員限定商品、ニュースレター)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-9-02">9-02</a></footer>
+</article>
+<div class="set"><span>セットB</span><em>(9-06〜9-07)</em></div>
+<div class="flow"><p>(このセットは2問です。セットAと続けてもOK)</p></div>
+<article class="card" id="c-9-06" data-type="app">
+<header class="card-head">
+<span class="num">9-06</span><span class="badge app">応用</span>
+<h3>ワッペンでカスタムしたいお客様</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「このキャップにワッペンをつけて、自分だけのものにしたいんです。」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「ワッペンってつけてもらえるの?」</li><li>お客様「イニシャルを入れたりできますか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q11・オペレーションガイド・加工対応ルール)</small></h4><ul>
+<li>会員特典にヒートシーラー(ワッペン圧着サービス)がある</li>
+<li>対象条件:購入後1ヵ月以内/ニューエラリワード会員/NEW ERA STANDARD FABRIC(綿100%・ポリエステル100%)のみ/帽子1点につき2文字まで。対応できない素材(メッシュ・ナイロン・ニット・GORE-TEXなど)やシルエットがある</li>
+<li>その場で「できます」と断定せず、「まず対象かお調べしますね」と条件を確認する。迷うときは担当リテールマネージャーに確認</li>
+<li>店舗限定ワッペン(サイドパッチ)は、別に対象条件がある(オペレーションガイドで確認)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「NEW ERA REWARDの会員の方は、ワッペンの圧着サービスをご利用いただけます。キャップの素材やご購入の時期で対象が決まっているので、まずこちらのキャップが対象かお調べしますね。対象でしたら、ワッペンでほかにはない自分だけの1つに仕上げていただけますよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ワッペンを圧着する前に、確認することは何だった?」(→購入時期・会員・素材・文字数)</li>
+<li>深掘り:「ワッペンの位置で迷っているお客様に、どう声をかける?」(→スウェットバンド上を推奨、縫い目は避ける、というルールに沿って一緒に決める)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-9-02">9-02</a><a class="chip" href="#c-9-04">9-04</a></footer>
+</article>
+<article class="card" id="c-9-07" data-type="app">
+<header class="card-head">
+<span class="num">9-07</span><span class="badge app">応用</span>
+<h3>オンラインでも買うお客様に30秒で</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「普段はネットで買うことが多いんですけど、会員になる意味あります?」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「お店にはたまにしか来ないんだけど…」</li><li>お客様「オンラインでもポイント使えるの?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q11)</small></h4><ul>
+<li>ポイントはニューエラオンラインストアと直営店の両方の購入で貯まる</li>
+<li>購入履歴の確認、マイサイズの登録ができる</li>
+<li>オンラインストアの送料が一定金額以上の購入で無料になる特典がある(金額は最新の条件を確認して伝える)</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「はい、オンラインストアでのお買い物もポイントの対象なので、お店とネット、どちらで買っても貯まります。マイサイズを登録しておけば、ネットでキャップを選ぶときもサイズで迷いにくくなりますし、購入履歴も確認できます。オンラインストアの送料が無料になる特典もありますので、詳しい条件もご案内しますね。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ネットで買う人にうれしい特典、3つ思い出してみて」</li>
+<li>深掘り:「送料無料の条件を聞かれたら、どうする?」(→最新の条件を確認してから伝える)</li>
+<li>※条件は時期で変わるため最新情報を確認</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#c-9-02">9-02</a><a class="chip" href="#c-9-04">9-04</a></footer>
+</article>
+</section><section class="chapter" id="ch10">
+<header class="ch-head"><span class="ch-no">第10章</span><h2>瞬発トレーニング</h2><p class="lead">球団名・サイズ・在庫の場所など「覚えていればすぐ答えられる」知識を、3秒で口から出せるようにする。お客様をお待たせせず、会話のテンポを止めないための練習。最後に、瞬発で出した知識を接客の一言につなげる【応用】カードで締める。</p></header>
+<h3 class="sub">瞬発トレーニングのやり方</h3>
+<div class="flow"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>やり方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>時間</td>
+<td>1問 <strong>3秒</strong> を目安に答える。考え込んだら「答え→もう一度」でテンポよく次へ</td>
+</tr>
+<tr>
+<td>回し方</td>
+<td><strong>5問連続</strong>で出して1セット。表は1回5〜10問を抜き出して出す(全部やらなくてOK)。5問言えたら次の表へ、または同じ表を逆向きに</td>
+</tr>
+<tr>
+<td>出し方</td>
+<td>問いかける人は下の表の左列を読み上げ、練習する人は右列を答える。慣れたら左右を入れ替える(逆引き)</td>
+</tr>
+<tr>
+<td>実物を使う</td>
+<td>売場やバックヤードのキャップ・商品を指さして「これは?」でもOK</td>
+</tr>
+<tr>
+<td>自主練</td>
+<td>表の右列を手や紙で隠して声に出す。スマホで読み上げを録音して、再生しながら答えるのもおすすめ</td>
+</tr>
+<tr>
+<td>声のかけ方</td>
+<td>出てこなかったら答えをすぐ伝えて、5問後にもう一度同じ問いを出す。「さっきより速かったね」と伸びたところを伝える</td>
+</tr>
+</tbody>
+</table></div>
+<div class="set"><span>セットA</span><em>(表10-A MLB30球団)</em></div>
+<div class="flow"><p>(30行あります。1回は5〜10チームを抜き出して出します)</p></div>
+<article class="card tablecard" id="t-10-A"><header class="card-head"><span class="num">表10-A</span><span class="badge quick">瞬発</span><h3>MLB30球団(都市→チーム名)</h3></header><div class="tbl"><p><strong>出し方</strong>:問いかける人が「都市」を言い、練習する人が「チーム名」を返す。(出典:Q16)</p>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>都市</th>
+<th>チーム名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>アリゾナ</td>
+<td>ダイヤモンドバックス</td>
+</tr>
+<tr>
+<td>2</td>
+<td>アトランタ</td>
+<td>ブレーブス</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ボルティモア</td>
+<td>オリオールズ</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ボストン</td>
+<td>レッドソックス</td>
+</tr>
+<tr>
+<td>5</td>
+<td>シカゴ</td>
+<td>カブス</td>
+</tr>
+<tr>
+<td>6</td>
+<td>シカゴ</td>
+<td>ホワイトソックス</td>
+</tr>
+<tr>
+<td>7</td>
+<td>シンシナティ</td>
+<td>レッズ</td>
+</tr>
+<tr>
+<td>8</td>
+<td>クリーブランド</td>
+<td>ガーディアンズ</td>
+</tr>
+<tr>
+<td>9</td>
+<td>コロラド</td>
+<td>ロッキーズ</td>
+</tr>
+<tr>
+<td>10</td>
+<td>デトロイト</td>
+<td>タイガース</td>
+</tr>
+<tr>
+<td>11</td>
+<td>ヒューストン</td>
+<td>アストロズ</td>
+</tr>
+<tr>
+<td>12</td>
+<td>カンザスシティ</td>
+<td>ロイヤルズ</td>
+</tr>
+<tr>
+<td>13</td>
+<td>ロサンゼルス</td>
+<td>エンゼルス</td>
+</tr>
+<tr>
+<td>14</td>
+<td>ロサンゼルス</td>
+<td>ドジャース</td>
+</tr>
+<tr>
+<td>15</td>
+<td>マイアミ</td>
+<td>マーリンズ</td>
+</tr>
+<tr>
+<td>16</td>
+<td>ミルウォーキー</td>
+<td>ブルワーズ</td>
+</tr>
+<tr>
+<td>17</td>
+<td>ミネソタ</td>
+<td>ツインズ</td>
+</tr>
+<tr>
+<td>18</td>
+<td>ニューヨーク</td>
+<td>メッツ</td>
+</tr>
+<tr>
+<td>19</td>
+<td>ニューヨーク</td>
+<td>ヤンキース</td>
+</tr>
+<tr>
+<td>20</td>
+<td>オークランド</td>
+<td>アスレチックス</td>
+</tr>
+<tr>
+<td>21</td>
+<td>フィラデルフィア</td>
+<td>フィリーズ</td>
+</tr>
+<tr>
+<td>22</td>
+<td>ピッツバーグ</td>
+<td>パイレーツ</td>
+</tr>
+<tr>
+<td>23</td>
+<td>サンディエゴ</td>
+<td>パドレス</td>
+</tr>
+<tr>
+<td>24</td>
+<td>サンフランシスコ</td>
+<td>ジャイアンツ</td>
+</tr>
+<tr>
+<td>25</td>
+<td>シアトル</td>
+<td>マリナーズ</td>
+</tr>
+<tr>
+<td>26</td>
+<td>セントルイス</td>
+<td>カージナルス</td>
+</tr>
+<tr>
+<td>27</td>
+<td>タンパベイ</td>
+<td>レイズ</td>
+</tr>
+<tr>
+<td>28</td>
+<td>テキサス</td>
+<td>レンジャーズ</td>
+</tr>
+<tr>
+<td>29</td>
+<td>トロント</td>
+<td>ブルージェイズ</td>
+</tr>
+<tr>
+<td>30</td>
+<td>ワシントン</td>
+<td>ナショナルズ</td>
+</tr>
+</tbody>
+</table>
+<p><strong>逆引きの出し方</strong>
+- <strong>チーム名→都市</strong>:「ドジャースは?」→「ロサンゼルス」。右列を読み上げて左列を答える。
+- <strong>2チームある都市</strong>:シカゴ・ロサンゼルス・ニューヨークは「2チーム両方言って」と出す(例:「ニューヨークは?」→「メッツとヤンキース」)。
+- <strong>ロゴ→チーム名</strong>:売場のオンフィールドキャップを指さして「これは?」→チーム名(+都市)を返す。
+- <strong>頭文字しばり</strong>:「"サン"から始まる都市のチームは?」→「パドレス、ジャイアンツ」/「"ソックス"がつくチームは?」→「レッドソックス、ホワイトソックス」。
+- <strong>5連続の例</strong>:ボストン→シアトル→テキサス→ミネソタ→セントルイス</p></div></article>
+<div class="set"><span>セットB</span><em>(表10-B キャップサイズ換算)</em></div>
+<article class="card tablecard" id="t-10-B"><header class="card-head"><span class="num">表10-B</span><span class="badge quick">瞬発</span><h3>キャップサイズ換算(インチ⇔cm)</h3></header><div class="tbl"><p>(出典:Q6)</p>
+<table>
+<thead>
+<tr>
+<th>インチ</th>
+<th>cm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>55.8cm</td>
+</tr>
+<tr>
+<td>7 1/8</td>
+<td>56.8cm</td>
+</tr>
+<tr>
+<td>7 1/4</td>
+<td>57.7cm</td>
+</tr>
+<tr>
+<td>7 3/8</td>
+<td>58.7cm</td>
+</tr>
+<tr>
+<td>7 1/2</td>
+<td>59.6cm</td>
+</tr>
+<tr>
+<td>7 5/8</td>
+<td>60.6cm</td>
+</tr>
+<tr>
+<td>7 3/4</td>
+<td>61.5cm</td>
+</tr>
+<tr>
+<td>7 7/8</td>
+<td>62.5cm</td>
+</tr>
+<tr>
+<td>8</td>
+<td>63.5cm</td>
+</tr>
+</tbody>
+</table>
+<p><strong>出題例</strong></p>
+<table>
+<thead>
+<tr>
+<th>問い</th>
+<th>答え</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「7 3/8は何cm?」</td>
+<td>58.7cm</td>
+</tr>
+<tr>
+<td>「60.6cmは何インチ?」</td>
+<td>7 5/8</td>
+</tr>
+<tr>
+<td>「7 1/4は?」</td>
+<td>57.7cm</td>
+</tr>
+<tr>
+<td>「一番小さいサイズと一番大きいサイズは?」</td>
+<td>7(55.8cm)と8(63.5cm)</td>
+</tr>
+<tr>
+<td>「7 1/2の1つ上と1つ下は?」</td>
+<td>7 5/8(60.6cm)と7 3/8(58.7cm)</td>
+</tr>
+<tr>
+<td>「61.5cmは?」</td>
+<td>7 3/4</td>
+</tr>
+<tr>
+<td>「7から8まで、インチで全部言って」</td>
+<td>7、7 1/8、7 1/4、7 3/8、7 1/2、7 5/8、7 3/4、7 7/8、8</td>
+</tr>
+</tbody>
+</table></div></article>
+<div class="set"><span>セットC</span><em>(表10-C バックヤードカテゴリ)</em></div>
+<article class="card tablecard" id="t-10-C"><header class="card-head"><span class="num">表10-C</span><span class="badge quick">瞬発</span><h3>バックヤードカテゴリ(在庫探し)</h3></header><div class="tbl"><p>(出典:Q15)</p>
+<table>
+<thead>
+<tr>
+<th>カテゴリ1</th>
+<th>カテゴリ2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CASUAL</td>
+<td>BL / OD / GOLF / Women's / KIDS / OTHER</td>
+</tr>
+<tr>
+<td>PA</td>
+<td>(なし)</td>
+</tr>
+<tr>
+<td>COLLABORATION</td>
+<td>(なし)</td>
+</tr>
+<tr>
+<td>BAG</td>
+<td>BACKPACK / OTHER</td>
+</tr>
+<tr>
+<td>ACC</td>
+<td>CARE ITEM / SOCKS / OTHER</td>
+</tr>
+<tr>
+<td>HEADWEAR</td>
+<td>BUCKET / KNITS / OTHER</td>
+</tr>
+</tbody>
+</table>
+<p><strong>出題例(「どこを探す?」形式)</strong></p>
+<table>
+<thead>
+<tr>
+<th>問い</th>
+<th>答え</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「ソックスの在庫、どこを探す?」</td>
+<td>ACC → SOCKS</td>
+</tr>
+<tr>
+<td>「バックパックの在庫は?」</td>
+<td>BAG → BACKPACK</td>
+</tr>
+<tr>
+<td>「キャップケアスプレーの在庫は?」</td>
+<td>ACC → CARE ITEM</td>
+</tr>
+<tr>
+<td>「ビーニー(ニット)の在庫は?」</td>
+<td>HEADWEAR → KNITS</td>
+</tr>
+<tr>
+<td>「バケットハットの在庫は?」</td>
+<td>HEADWEAR → BUCKET</td>
+</tr>
+<tr>
+<td>「キッズのアパレルは?」</td>
+<td>CASUAL → KIDS</td>
+</tr>
+<tr>
+<td>「BLはカテゴリ1で何?」</td>
+<td>CASUAL</td>
+</tr>
+<tr>
+<td>「ODとGOLFはどのカテゴリ1の中?」</td>
+<td>CASUAL</td>
+</tr>
+<tr>
+<td>「カテゴリ2がないカテゴリ1を2つ」</td>
+<td>PA、COLLABORATION</td>
+</tr>
+<tr>
+<td>「ACCのカテゴリ2を全部」</td>
+<td>CARE ITEM、SOCKS、OTHER</td>
+</tr>
+</tbody>
+</table></div></article>
+<div class="set"><span>セットD</span><em>(表10-D〜表10-F ソックス・キッズ・MLB以外のコレクション)</em></div>
+<div class="flow"><p>(表が3つあります。1回は1〜2つの表から5〜10問を抜き出して出します)</p></div>
+<article class="card tablecard" id="t-10-D"><header class="card-head"><span class="num">表10-D</span><span class="badge quick">瞬発</span><h3>ソックス</h3></header><div class="tbl"><p>(出典:Q10)</p>
+<table>
+<thead>
+<tr>
+<th>種類(5)</th>
+<th>サイズ(4)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ノーショー/ベリーショート/ショート/アンクル/クルー</td>
+<td>21-23cm/23-25cm/25-27cm/27-29cm</td>
+</tr>
+</tbody>
+</table>
+<p><strong>出題例</strong></p>
+<table>
+<thead>
+<tr>
+<th>問い</th>
+<th>答え</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「ソックスの種類、全部で何種類?全部言って」</td>
+<td>5種類:ノーショー、ベリーショート、ショート、アンクル、クルー</td>
+</tr>
+<tr>
+<td>「足が24cmのお客様は?」</td>
+<td>23-25cm</td>
+</tr>
+<tr>
+<td>「足が28cmのお客様は?」</td>
+<td>27-29cm</td>
+</tr>
+<tr>
+<td>「一番小さいソックスのサイズは?」</td>
+<td>21-23cm</td>
+</tr>
+<tr>
+<td>「サイズ展開は何種類?」</td>
+<td>4種類</td>
+</tr>
+</tbody>
+</table></div></article>
+<article class="card tablecard" id="t-10-E"><header class="card-head"><span class="num">表10-E</span><span class="badge quick">瞬発</span><h3>キッズ3サイズ</h3></header><div class="tbl"><p>(出典:Q14)</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>対象年齢</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>My 1st</td>
+<td>0-2歳</td>
+</tr>
+<tr>
+<td>Child</td>
+<td>2-6歳</td>
+</tr>
+<tr>
+<td>Youth</td>
+<td>6-15歳</td>
+</tr>
+</tbody>
+</table>
+<p><strong>出題例</strong></p>
+<table>
+<thead>
+<tr>
+<th>問い</th>
+<th>答え</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「4歳のお子さん用は?」</td>
+<td>Child</td>
+</tr>
+<tr>
+<td>「1歳の赤ちゃん用は?」</td>
+<td>My 1st</td>
+</tr>
+<tr>
+<td>「10歳のお子さん用は?」</td>
+<td>Youth</td>
+</tr>
+<tr>
+<td>「Youthは何歳から何歳?」</td>
+<td>6-15歳</td>
+</tr>
+<tr>
+<td>「キッズのサイズ名、小さい順に3つ」</td>
+<td>My 1st、Child、Youth</td>
+</tr>
+</tbody>
+</table></div></article>
+<article class="card tablecard" id="t-10-F"><header class="card-head"><span class="num">表10-F</span><span class="badge quick">瞬発</span><h3>MLB以外のコレクション</h3></header><div class="tbl"><p>(出典:Q5)</p>
+<table>
+<thead>
+<tr>
+<th>MLB以外のコレクション(6)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cooperstown / Negro Leagues / NBA / NFL / NPB / NPB Classic</td>
+</tr>
+</tbody>
+</table>
+<p><strong>出題例</strong></p>
+<table>
+<thead>
+<tr>
+<th>問い</th>
+<th>答え</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「MLB以外のコレクション、6つ全部」</td>
+<td>Cooperstown、Negro Leagues、NBA、NFL、NPB、NPB Classic</td>
+</tr>
+<tr>
+<td>「"N"から始まるもの、全部」</td>
+<td>Negro Leagues、NBA、NFL、NPB、NPB Classic</td>
+</tr>
+<tr>
+<td>「NPBと並んである、もう1つのNPBは?」</td>
+<td>NPB Classic</td>
+</tr>
+<tr>
+<td>「Nから始まらないものは?」</td>
+<td>Cooperstown</td>
+</tr>
+</tbody>
+</table></div></article>
+<div class="set"><span>セットE</span><em>(10-01〜10-03)</em></div>
+<div class="flow"><p>(このセットは3問です。前の表のセットと続けてもOK)</p>
+<p>瞬発で出した知識を、お客様との会話の一言につなげる練習です。</p></div>
+<article class="card" id="c-10-01" data-type="app">
+<header class="card-head">
+<span class="num">10-01</span><span class="badge app">応用</span>
+<h3>頭のサイズからキャップを選ぶ</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「頭を測ったら59cmくらいだったんですけど、どのサイズを被ればいいですか?」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「サイズってインチなんですね、何を選べばいいかわからなくて」</li><li>お客様「58cmくらいだと何インチ?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q6・Q7)</small></h4><ul>
+<li>サイズ表で近いサイズを確認する:59cmは7 3/8(58.7cm)と7 1/2(59.6cm)の間</li>
+<li>近いサイズを2つ用意して、被り比べていただく</li>
+<li>59FIFTYはトゥルーフィッテド(サイズ調整のない仕様)なので、実際に被って確かめることが大切</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「59cmくらいですと、サイズ表では7 3/8が58.7cm、7 1/2が59.6cmで、ちょうどその間になります。キャップは被り心地のお好みもあるので、この2つをご用意しますね。実際に被り比べていただくと、ご自身にちょうどいいサイズを選んでいただけます。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:表10-Bで「59cmに近いcmを2つ探して」</li>
+<li>深掘り:「"サイズ調整できるのがいい"と言われたら、何を見せる?」(→アジャスタブルのモデル)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#t-10-B">表10-B</a><a class="chip" href="#c-3-01">3-01</a><a class="chip" href="#c-3-02">3-02</a><a class="chip" href="#c-4-04">4-04</a></footer>
+</article>
+<article class="card" id="c-10-02" data-type="app">
+<header class="card-head">
+<span class="num">10-02</span><span class="badge app">応用</span>
+<h3>ソックスのサイズと種類を案内する</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「足のサイズ24cmなんですけど、この靴下ってどのサイズを選べばいいですか?」 どう答える?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「靴下ってサイズ分かれてるんですか?」</li><li>お客様「短い靴下ってありますか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q10)</small></h4><ul>
+<li>24cmは23-25cm</li>
+<li>種類はノーショー、ベリーショート、ショート、アンクル、クルーの5種類</li>
+<li>長さの違いは、実物を並べて見ていただく</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「24cmでしたら、23-25cmのサイズがぴったりです。ソックスはノーショー、ベリーショート、ショート、アンクル、クルーの5種類があるので、今日履かれる靴やお好みの長さに合わせて選んでいただけます。実際に並べてご覧いただくと、違いがわかりやすいですよ。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「ソックスのサイズは4つ。24cmが入るのは?」</li>
+<li>深掘り:「在庫を取りに行くなら、バックヤードのどこ?」(→ACC → SOCKS)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#t-10-C">表10-C</a><a class="chip" href="#t-10-D">表10-D</a><a class="chip" href="#c-6-02">6-02</a></footer>
+</article>
+<article class="card" id="c-10-03" data-type="app">
+<header class="card-head">
+<span class="num">10-03</span><span class="badge app">応用</span>
+<h3>年齢のちがう2人のお子さんへのプレゼント</h3></header>
+<div class="q"><span class="label">問い</span><p>お客様「孫が2人いて、1歳と10歳なんです。2人にキャップを贈りたいんですけど、子ども用ってありますか?」 何を提案する?</p></div>
+<div class="para"><span class="label">言い換え</span><ul><li>お客様「赤ちゃん用と小学生用、両方ありますか?」</li><li>お客様「兄弟でサイズが違うんですけど、選べますか?」</li></ul></div>
+<button type="button" class="peek">答えを見る</button>
+<div class="answer">
+<section class="box pts"><h4>答えのポイント <small>(出典:Q14)</small></h4><ul>
+<li>キッズは3サイズ:My 1st(0-2歳)、Child(2-6歳)、Youth(6-15歳)</li>
+<li>1歳はMy 1st、10歳はYouth</li>
+<li>お子さんの年齢を伺って、サイズ名を案内する</li>
+</ul></section>
+<section class="box ex"><h4>良い答えの例</h4><blockquote>「お二人分ですね。キッズは年齢別に3サイズあって、1歳のお孫さんには0〜2歳向けのMy 1st、10歳のお孫さんには6〜15歳向けのYouthがおすすめです。年齢でサイズを選べるので、頭のサイズがわからなくても安心して贈っていただけます。デザインはこちらから一緒に見てみましょうか。」</blockquote></section>
+<section class="box hint"><h4>問いかける人へ</h4><ul>
+<li>詰まったら:「キッズの3サイズ、小さい順に言ってみて」</li>
+<li>深掘り:「"もう1人、4歳の子もいる"と言われたら?」(→Child、2-6歳)</li>
+</ul></section>
+</div>
+<footer class="rel"><span class="label">関連</span><a class="chip" href="#t-10-E">表10-E</a><a class="chip" href="#c-5-02">5-02</a><a class="chip" href="#c-5-08">5-08</a></footer>
+</article>
+</section>
+</main>
+<script>
+(function(){
+  var b=document.getElementById('toggle');
+  b.addEventListener('click',function(){
+    var on=document.body.classList.toggle('hide-answers');
+    b.setAttribute('aria-pressed',on?'true':'false');
+    b.textContent=on?'答えを表示':'答えを隠す';
+  });
+  document.addEventListener('click',function(e){
+    var p=e.target.closest('.peek'); if(!p) return;
+    var c=p.closest('.card'); var o=c.classList.toggle('open');
+    p.textContent=o?'答えを閉じる':'答えを見る';
+  });
+})();
+</script>
+</body>
+</html>
